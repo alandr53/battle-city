@@ -37,7 +37,7 @@
                         this.loadOrder.images.splice(index, 1)
                     }
                 })
-                promises.push(promise) 
+                promises.push(promise) // Versprechen
             }
 
             for (const jsonData of this.loadOrder.jsons) {
