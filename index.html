@@ -10,6 +10,7 @@
     <!--1) Loader-->
     <!--2) Application-->
     <!--3) Rendering-->
+    <script src="engine/DisplayObject.js"></script>
     <script src="engine/Container.js"></script>
     <script src="engine/Loader.js"></script>
     <script src="engine/Renderer.js"></script>
@@ -66,8 +67,8 @@
             //const sprite = new Sprite(loader.getImage('hase'))
             sprite = new Sprite(loader.getImage('cola'), {
                 scale:   0.25,
-                anchorX: 0.5,
-                anchorY: 0.5
+             //   anchorX: 0.5,
+             //   anchorY: 0.5
             })
 
             const container = new Container()
