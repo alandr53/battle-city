@@ -4,7 +4,8 @@
     class Sprite extends GameEngine.DisplayObject {
         constructor(texture, args = {}){
             super(args)
-            this.texture = texture;
+
+            this.texture = texture
 
             const frame = args.frame || { }
 
@@ -15,52 +16,14 @@
                 height: frame.height || texture.height
             }
 
-            if(args.scale != undefined) {
-                this.setScale(args.scale)
+            if(args.width === undefined) {
+                this.width = this.frame.width
             }
-        }
 
-        setScale(value) {
-            this.scaleX = value
-            this.scaleY = value 
-        }
+            if(args.height === undefined) {
+                this.height = this.frame.height
+            }
 
-        get absoluteX () { 
-            return this.x - this.anchorX * this.width
-        }
-
-        set absoluteX(value) { 
-            this.x = value + this.anchorX * this.width
-           
-            return value
-        }
-
-        
-
-        get absoluteY () {
-            return  this.y - this.anchorY * this.height
-        }
-
-        set absoluteY (value) { 
-            this.y = value + this.anchorY * this.height
-        }
-
-        get scaleX () {
-            return this.width / this.frame.width
-        }
-
-        set scaleX (value) {
-            this.width = this.frame.width * value
-            return value
-        }
-        
-        get scaleY () {
-            return this.heght / this.frame.height
-        }
-
-        set scaleY (value) {
-            this.height = this.frame.height * value 
-            return value
         }
 
         draw (canvas, context) {
