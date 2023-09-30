@@ -36,8 +36,7 @@
         }
 
         set absoluteX(value) { 
-            this.x = value + this.anchorX * this.width
-           
+            this.x = value + this.anchorX * this.width      
             return value
         }
 
