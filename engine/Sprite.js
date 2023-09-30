@@ -1,8 +1,9 @@
 ;(function () {
     'use strict'
 
-    class Sprite {
+    class Sprite extends GameEngine.DisplayObject {
         constructor(texture, args = {}){
+            super(args)
             this.texture = texture;
 
             const frame = args.frame || { }
@@ -13,13 +14,6 @@
                 width: frame.width || texture.width,
                 height: frame.height || texture.height
             }
-
-            this.x = args.x || 0 
-            this.y = args.y || 0
-            this.anchorX = args.anchorX || 0 
-            this.anchorY = args.anchorY || 0
-            this.width = args.width || this.frame.width
-            this.height = args.height || this.frame.height
 
             if(args.scale != undefined) {
                 this.setScale(args.scale)

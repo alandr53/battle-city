@@ -8,6 +8,9 @@ class DisplayObject {
         this.y = args.y || 0
         this.width = args.width || 0
         this.height = args.height || 0 
+        this.rotation = args.rotation || 0
+        this.anchorX = args.anchorX || 0 
+        this.anchorY = args.anchorY || 0
     }
     draw () { }
 }

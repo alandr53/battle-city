@@ -1,8 +1,9 @@
 ;(function () {
     'use strict'
 
-class Container {  
-    constructor () {
+class Container extends GameEngine.DisplayObject {  
+    constructor (args = {}) {
+        super()
         this.displayObjects = []
     }
     
@@ -12,14 +13,16 @@ class Container {
         }
     }
 
-
+    
+    remove () {}
+    
     draw (canvas, context) {
         for (const displayObject of this.displayObjects) {
             displayObject.draw(canvas, context)
         }
     }
 
-    remove () {}
+    
 }
 
     window.GameEngine = window.GameEngine || {}
