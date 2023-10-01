@@ -41,7 +41,6 @@ class DisplayObject {
         this.y = value + this.anchorY * this.height
     }
 
-
     setScale (scale) {
         this.scaleX = scale
         this.scaleY = scale

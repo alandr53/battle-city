@@ -5,6 +5,7 @@ class Container extends GameEngine.DisplayObject {
     constructor (args = {}) {
         super()
         this.displayObjects = []
+
     }
     
     add (displayObject) {
@@ -13,15 +14,21 @@ class Container extends GameEngine.DisplayObject {
         }
     }
 
-    
     remove () {}
     
+    
     draw (canvas, context) {
+        context.save()
+        context.translate(this.x, this.y)
+        context.rotate(this.rotation)
+        context.scale(this.scaleX, this.scaleY)
+
         for (const displayObject of this.displayObjects) {
             displayObject.draw(canvas, context)
         }
-    }
 
+        context.restore()
+    }
     
 }
 

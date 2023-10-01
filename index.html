@@ -33,6 +33,7 @@
                 if(!sprite) {
                     return
                 }
+                sprite.rotation = timetamp / 1000
                 //sprite.x = renderer.canvas.width / 2 + 100 * Math.cos(timetamp/100)
                 //sprite.y = renderer.canvas.width / 2 + 100 * Math.sin(timetamp/100)
     
@@ -66,12 +67,21 @@
         loader.load(() => {
             //const sprite = new Sprite(loader.getImage('hase'))
             sprite = new Sprite(loader.getImage('cola'), {
+                x: renderer.canvas.width / 2,
+                y: renderer.canvas.height / 2,
+                rotation: Math.PI / 2,
                 scale:   0.25,
-             //   anchorX: 0.5,
-             //   anchorY: 0.5
+                anchorX: 0.5,
+                anchorY: 0.5
             })
 
             const container = new Container()
+            //container.x = 100
+            //container.y = 100
+            //container.rotation = Math.PI / 4
+            //container.anchorX = 0.5
+            //container.anchorY = 0.5
+
             renderer.stage.add(container)
             container.add(sprite)
 
@@ -97,4 +107,4 @@
 
 </html>
 
-<!-- Day 3 19:00-->
+<!-- Day 3 53:32-->
