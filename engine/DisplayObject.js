@@ -19,6 +19,7 @@ class DisplayObject {
         this.scaleY = args.scaleY || 1
 
         this.parent = null
+        this.visible = true
 
         if(args.scale != undefined) {
             this.setScale(args.scale)
@@ -59,7 +60,11 @@ class DisplayObject {
         
     }
 
-    draw () { }
+    draw (callback) {
+        if(this.visible) {
+            callback() 
+        }
+     }
 
 }
 

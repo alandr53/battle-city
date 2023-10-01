@@ -6,7 +6,7 @@ class Renderer {
         this.canvas = document.createElement('canvas')
         this.context = this.canvas.getContext('2d')
 
-        this.background = args.background || black
+        this.background = args.background || 'black'
         this.canvas.width = args.width || 50
         this.canvas.height = args.height || 50
         this.update = args.update || (() => {})
