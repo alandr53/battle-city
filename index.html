@@ -10,6 +10,7 @@
     <!--1) Loader-->
     <!--2) Application-->
     <!--3) Rendering-->
+    <script src="engine/DisplayObject.js"></script>
     <script src="engine/Container.js"></script>
     <script src="engine/Loader.js"></script>
     <script src="engine/Renderer.js"></script>
@@ -21,7 +22,9 @@
 
         
         const {Loader, Renderer, Sprite, Container} = GameEngine
-        let sprite = 0
+        let sprite1 = null
+        let sprite2 = null
+        let container = null
         const loader = new Loader
         const renderer = new Renderer({
             width: 500,
@@ -29,9 +32,13 @@
             background: 'gray',
 
             update (timetamp) {
-                if(!sprite) {
+                if(!sprite1 || !sprite2) {
                     return
                 }
+                container.rotation = timetamp / 1000
+                sprite1.rotation = timetamp / 1000
+                sprite2.rotation = -timetamp / 1000
+                
                 //sprite.x = renderer.canvas.width / 2 + 100 * Math.cos(timetamp/100)
                 //sprite.y = renderer.canvas.width / 2 + 100 * Math.sin(timetamp/100)
     
@@ -64,15 +71,38 @@
       
         loader.load(() => {
             //const sprite = new Sprite(loader.getImage('hase'))
-            sprite = new Sprite(loader.getImage('cola'), {
+            sprite1 = new Sprite(loader.getImage('cola'), {
+                x: 100,
+                y: 200,
+                //rotation: Math.PI / 2,
                 scale:   0.25,
                 anchorX: 0.5,
                 anchorY: 0.5
             })
 
-            const container = new Container()
+            sprite2 = new Sprite(loader.getImage('cola'), {
+                x: 200,
+                y: 200,
+                //rotation: Math.PI / 2,
+                scale:   0.25,
+                anchorX: 0.5,
+                anchorY: 0.5
+            })
+            
+
+            //const container = new Container()
+            container = new Container()
+            container.x = 100
+            container.y = 100
+            //container.rotation = Math.PI / 4
+            container.anchorX = 0.5
+            container.anchorY = 0.5
+            container.width = renderer.canvas.width
+            container.height = renderer.canvas.height
+
             renderer.stage.add(container)
-            container.add(sprite)
+            container.add(sprite1)
+            container.add(sprite2)
 
             //sprite.absoluteX = 0
             //sprite.absoluteY = 0
@@ -96,4 +126,3 @@
 
 </html>
 
-<!-- Day 2 30:50-->

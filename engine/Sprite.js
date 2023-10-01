@@ -1,11 +1,12 @@
 ;(function () {
     'use strict'
 
-    class Sprite {
+    class Sprite extends GameEngine.DisplayObject {
         constructor(texture, args = {}){
-            this.texture = texture;
-
+            super(args)
             const frame = args.frame || { }
+
+            this.texture = texture
 
             this.frame = {
                 x: frame.x || 0,
@@ -14,61 +15,22 @@
                 height: frame.height || texture.height
             }
 
-            this.x = args.x || 0 
-            this.y = args.y || 0
-            this.anchorX = args.anchorX || 0 
-            this.anchorY = args.anchorY || 0
-            this.width = args.width || this.frame.width
-            this.height = args.height || this.frame.height
-
-            if(args.scale != undefined) {
-                this.setScale(args.scale)
+            if(args.width === undefined) {
+                this.width = this.frame.width
             }
-        }
 
-        setScale(value) {
-            this.scaleX = value
-            this.scaleY = value 
-        }
+            if(args.height === undefined) {
+                this.height = this.frame.height
+            }
 
-        get absoluteX () { 
-            return this.x - this.anchorX * this.width
-        }
-
-        set absoluteX(value) { 
-            this.x = value + this.anchorX * this.width      
-            return value
-        }
-
-        
-
-        get absoluteY () {
-            return  this.y - this.anchorY * this.height
-        }
-
-        set absoluteY (value) { 
-            this.y = value + this.anchorY * this.height
-        }
-
-        get scaleX () {
-            return this.width / this.frame.width
-        }
-
-        set scaleX (value) {
-            this.width = this.frame.width * value
-            return value
-        }
-        
-        get scaleY () {
-            return this.heght / this.frame.height
-        }
-
-        set scaleY (value) {
-            this.height = this.frame.height * value 
-            return value
         }
 
         draw (canvas, context) {
+            context.save()
+            context.translate(this.x, this.y)
+            context.rotate(-this.rotation)
+            context.scale(this.scaleX, this.scaleY)
+
             context.drawImage(
                 this.texture,
 
@@ -76,13 +38,17 @@
                 this.frame.y,
                 this.frame.width,
                 this.frame.height,
-
-                this.absoluteX,
-                this.absoluteY,
+                this.absoluteX - this.x,
+                this.absoluteY - this.y,
                 this.width,
                 this.height
-
             )
+context.beginPath()
+context.fillStyle = 'red'
+context.arc(0, 0, 5, 0, Math.PI * 2)
+context.fill()
+
+            context.restore()
         }
     }
     window.GameEngine = window.GameEngine || {}
