@@ -5,31 +5,31 @@
         constructor(args = {}){
             this.renderer = new GameEngine.Renderer(args)
             this.loader = new GameEngine.Loader()
-            this.scenes = new GameEngine.Container()
+            this.scenesCollection = new GameEngine.Container()
 
             if(args.scenes){
-                this.scenes.add(...args.scenes)
+                this.scenesCollection.add(...args.scenes)
             }
            
             if(args.el && args.el.appendChild) {
                 args.el.appendChild(this.renderer.canvas)
             }
 
-            for(const scene of this.scenes.displayObjects) {
+            for(const scene of this.scenes) {
                 if(scene.autoStart) {
-                    scene.loader(this)
+                    scene.loading(this.loader)
                 }
             }
-        }
 
-        addScene (...scenes) {
-            for (const scene of scenes) {
-                if(!this.scenes.includes(scene)) {
-                    this.scenes.push(scene)
-                }
-            }
+            this.loader.load(() => {
+                
+            })
         }
-    }
+        get scenes() {
+            return this.scenesCollection.displayObjects
+        }
+               
+            }
 
     window.GameEngine = window.GameEngine || {}
     window.GameEngine.Game = Game
