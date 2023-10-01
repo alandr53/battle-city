@@ -18,6 +18,8 @@ class DisplayObject {
         this.scaleX = args.scaleX || 1
         this.scaleY = args.scaleY || 1
 
+        this.parent = null
+
         if(args.scale != undefined) {
             this.setScale(args.scale)
         }
@@ -44,6 +46,17 @@ class DisplayObject {
     setScale (scale) {
         this.scaleX = scale
         this.scaleY = scale
+    }
+
+    setParent(parent) {
+        if(this.parent) {
+            this.parent.remove(this)
+        }
+        if(parent) {
+            parent.add(this)
+            this.parent = parent
+        }
+        
     }
 
     draw () { }
