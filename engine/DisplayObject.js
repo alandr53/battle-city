@@ -56,9 +56,8 @@ class DisplayObject {
 
         if(parent && parent.add) {
             parent.add(this)
-
-            this.parent = parent
-        }       
+        } 
+            this.parent = parent           
     }
 
     draw (callback) {

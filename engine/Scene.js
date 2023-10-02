@@ -24,7 +24,7 @@
             }
 
             if (args.beforeDestroy) {
-                this.beforeDestroy = args.bevoreDestroy.bind(this)  
+                this.beforeDestroy = args.beforeDestroy.bind(this)  
             }
 
         }
@@ -32,11 +32,7 @@
         init() {}
         update() {}
 
-        beforeDestroy () {        
-            for (const key of Object.keys(this)) {
-                delete this[key]
-            }      
-        }
+        beforeDestroy () { }
     }
 
     window.GameEngine = window.GameEngine || {}
