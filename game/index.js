@@ -1,4 +1,4 @@
-const {Sprite, Game, Scene, Point, Line, Container} = GameEngine
+const {Body, Game, Scene, Point, Line, Container} = GameEngine
 
 mainScene = new Scene({
                            autoStart: true,
@@ -11,7 +11,8 @@ mainScene = new Scene({
                            init() {
                                const colaTexture = this.parent.loader.getImage('cola')
                                const graphicContainer = new Container
-                               this.sprite = new Sprite(colaTexture, {
+
+                               this.cola = new Body(colaTexture, {
                                    scale:  0.25,
                                    anchorX: 0.5,
                                    anchorY: 0.5,
@@ -21,8 +22,8 @@ mainScene = new Scene({
                                })
 
                               const point = new Point({
-                                    x: this.sprite.x,
-                                    y: this.sprite.y,
+                                    x: this.cola.x,
+                                    y: this.cola.y,
                                })
 
                               const line = new Line({
@@ -33,7 +34,7 @@ mainScene = new Scene({
                                })
 
                                graphicContainer.add(point, line )
-                               this.add(this.sprite)
+                               this.add(this.cola)
                                this.add(graphicContainer)
                            },
 
@@ -43,11 +44,11 @@ mainScene = new Scene({
                             let speedRotation = keyboard.space ? Math.PI / 100 : Math.PI / 200
 
                                if (keyboard.arrowUp) {
-                                this.sprite.rotation += speedRotation
+                                this.cola.rotation += speedRotation
                                }
 
                                if (keyboard.arrowDown) {
-                                this.sprite.rotation -= speedRotation
+                                this.cola.rotation -= speedRotation
                                }
                              
                            }
