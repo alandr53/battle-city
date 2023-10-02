@@ -19,7 +19,7 @@ class Container extends GameEngine.DisplayObject {
 
     remove (...displayObjects) {
         for(const displayObject of displayObjects) {
-            if(!this.displayObjects.includes(displayObject)) {
+            if(this.displayObjects.includes(displayObject)) {
                 const index = this.displayObjects.indexOf(displayObject)
                 this.displayObjects.splice(index, 1)
                 displayObject.setParent(null)

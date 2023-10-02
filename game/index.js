@@ -2,6 +2,7 @@ const {Sprite, Game, Scene, Point, Line, Container} = GameEngine
 
 mainScene = new Scene({
                            autoStart: true,
+                           name: 'mainScene',
 
                            loading(loader) {
                                loader.addImage('cola', 'static/cola.jpeg')
@@ -35,7 +36,8 @@ mainScene = new Scene({
                                this.add(this.sprite)
                                this.add(graphicContainer)
                            },
-                           update(timestemp) {
+
+                           update(timestamp) {
                             const {keyboard} = this.parent
 
                             let speedRotation = keyboard.space ? Math.PI / 100 : Math.PI / 200
@@ -47,7 +49,7 @@ mainScene = new Scene({
                                if (keyboard.arrowDown) {
                                 this.sprite.rotation -= speedRotation
                                }
-
+                             
                            }
 })
 
@@ -62,3 +64,5 @@ mainScene = new Scene({
    // https://www.obuka.org/course/webcademy-igra-tanchiki-na-javascript-intensiv/9598-den-415/?p=1
 
    // Day-4 || 1:45
+
+   //https://github.com/alandr53/battle-city

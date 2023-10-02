@@ -64,7 +64,55 @@
           
             requestAnimationFrame(timestamp => this.tick(timestamp)) 
         }
-    
+
+        getScene (name) {
+            if (name instanceof GameEngine.Scene) {
+                if (this.scenes.includes(name)) {
+                    return name
+                }
+
+            }  
+            if (typeof name === 'string') {
+                for (const scene of this.scenes) {
+                    if (scene.name === name) {
+                        return scene
+                    }
+                }              
+            } 
+        }
+
+        startScene (name) {
+            const scene = this.getScene(name)
+
+            if(!scene) {
+                return false
+            }
+
+                scene.status = 'loading'
+                scene.loading(this.loader)
+           
+                    
+            this.loader.load(() => {              
+                    scene.status = 'init'
+                    scene.init()
+            
+                    scene.status = 'started'       
+            })
+            return true
+        }
+
+        finishScene (name) {
+            const scene = this.getScene(name)
+
+            if(!scene) {
+                return false
+            }
+            scene.status = 'finisched'
+            this.scenesCollection.remove(scene)
+            scene.beforeDestroy()
+           
+            
+        }
                
             }
 
