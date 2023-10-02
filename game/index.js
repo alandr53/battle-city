@@ -13,29 +13,22 @@ mainScene = new Scene({
                                const graphicContainer = new Container
 
                                this.cola = new Body(colaTexture, {
-                                   scale:  0.25,
+                                   scale:  0.5,
                                    anchorX: 0.5,
                                    anchorY: 0.5,
                                    x:      this.parent.renderer.canvas.width / 2,
-                                   y:      this.parent.renderer.canvas.height / 2
-
+                                   y:      this.parent.renderer.canvas.height / 2,
+                                   debug: true,
+                                   body: {
+                                        x: 0,
+                                        y: 0.5,
+                                        width: 1,
+                                        height: 0.5
+                                  }
                                })
 
-                              const point = new Point({
-                                    x: this.cola.x,
-                                    y: this.cola.y,
-                               })
-
-                              const line = new Line({
-                                    x1: 0, 
-                                    y1: 0,
-                                    x2: this.parent.renderer.canvas.width,
-                                    y2: this.parent.renderer.canvas.height
-                               })
-
-                               graphicContainer.add(point, line )
+                             
                                this.add(this.cola)
-                               this.add(graphicContainer)
                            },
 
                            update(timestamp) {
