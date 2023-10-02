@@ -125,10 +125,18 @@
                             autoStart: true,
 
                             loading(loader) {
-                                console.log('loading fired')
+                                loader.addImage('cola', 'static/cola.jpeg')
+                                loader.addJson('persons', 'static/persons.json')
                             },
                             init() {
-                                console.log('init fired')
+                                const colaTexture = this.parent.loader.getImage('cola')
+                                this.sprite = new Sprite(colaTexture, {
+                                    scale:  0.25,
+                                    x:      this.parent.renderer.canvas.width / 2,
+                                    y:      this.parent.renderer.canvas.height / 2
+
+                                })
+                                this.add(this.sprite)
                             },
                             update() {
                                 console.log('update fired')

@@ -9,7 +9,6 @@ class Renderer {
         this.background = args.background || 'black'
         this.canvas.width = args.width || 50
         this.canvas.height = args.height || 50
-        this.update = args.update || (() => {})
 
         //this.stage = new GameEngine.Container()
 
