@@ -11,11 +11,11 @@ class Renderer {
         this.canvas.height = args.height || 50
         this.update = args.update || (() => {})
 
-        this.stage = new GameEngine.Container()
+        //this.stage = new GameEngine.Container()
 
-        requestAnimationFrame(timestamp => this.tick(timestamp)) 
+
     }
-    get displayObjects() {
+   /* get displayObjects() {
         return _getDisplayObjects(this.stage)
 
         function _getDisplayObjects (container, result = [] ) { 
@@ -29,21 +29,11 @@ class Renderer {
             }
             return result 
         }
-    }
-
-    tick (timestamp) {
-        this.update(timestamp)
-
-        this.clear() 
-
-        this.render()
-
-        requestAnimationFrame(timestamp => this.tick(timestamp)) 
-    }
-
-    render() {
+    }*/
+   
+  /*  render() {
         this.stage.draw(this.canvas, this.context)
-    }
+    }*/
 
    /* draw (callback) {
         callback(this.canvas, this.context)

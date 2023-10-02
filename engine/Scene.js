@@ -6,8 +6,10 @@
             super() 
 
             this.autoStart = args.autoStart || false
-            this.stage = this.displayObject
-
+            this.status = 'waiting'
+            this.stage = this.displayObjects
+            this.game = null
+           
             if (args.loading) {
                 this.loading = args.loading.bind(this)
             }
@@ -19,6 +21,7 @@
             if (args.update) {
                 this.update = args.update.bind(this)  
             }
+
         }
         loading () {}
         init() {}

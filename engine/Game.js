@@ -8,26 +8,60 @@
             this.scenesCollection = new GameEngine.Container()
 
             if(args.scenes){
-                this.scenesCollection.add(...args.scenes)
+                this.addScene(...args.scenes)
             }
            
             if(args.el && args.el.appendChild) {
                 args.el.appendChild(this.renderer.canvas)
             }
 
-            for(const scene of this.scenes) {
-                if(scene.autoStart) {
-                    scene.loading(this.loader)
-                }
-            }
+            const autoStartedScenes = this.scenes.filter(x => x.autoStart)
 
+            for(const scene of autoStartedScenes) {
+                scene.status = 'loading'
+                scene.loading(this.loader)
+            }      
+                    
             this.loader.load(() => {
-                
+                for(const scene of autoStartedScenes) {
+                    scene.status = 'init'
+                    scene.init()
+                }      
+
+                for(const scene of autoStartedScenes) {
+                    scene.status = 'started'
+                 
+                }      
             })
+
+            requestAnimationFrame(timestamp => this.tick(timestamp)) 
         }
+
+        addScene (...scenes) {
+            this.scenesCollection.add(...scenes)
+
+            for (const scene of scenes) {
+                scene.parent = this
+            }
+        }
+
         get scenes() {
             return this.scenesCollection.displayObjects
         }
+
+        tick (timestamp) {
+          
+          //this.renderer.render()
+    
+            for (const scene of this.scenes) {
+                if (scene.status === 'started') {
+                    scene.update(timestamp)
+                }
+            }
+            this.renderer.clear() 
+            requestAnimationFrame(timestamp => this.tick(timestamp)) 
+        }
+    
                
             }
 

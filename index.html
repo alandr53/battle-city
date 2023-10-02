@@ -22,7 +22,7 @@
 
     <script>   
         const {Loader, Renderer, Sprite, Container, Game, Scene} = GameEngine
-        let sprite1 = null
+  /*      let sprite1 = null
         let sprite2 = null
         let container = null
         const loader = new Loader
@@ -60,7 +60,7 @@
                         Math.PI * 2
                         )
                     content.fill()
-                })*/
+                })
             } 
         })
 
@@ -118,30 +118,30 @@
             /*sprite.x = 100
             sprite.y = 300
             sprite.width = 100
-            sprite.height = 100*/
-        }) 
+            sprite.height = 100
+        }) */
 
-const mainScene = new Scene({
-    autostart: true,
+ mainScene = new Scene({
+                            autoStart: true,
 
-    lading(loader) {
-        console.log('loading fired')
-    },
-    init() {
-        console.log('init fired')
-    },
-    update() {
-        console.log('update fired')
-    }
+                            loading(loader) {
+                                console.log('loading fired')
+                            },
+                            init() {
+                                console.log('init fired')
+                            },
+                            update() {
+                                console.log('update fired')
+                            }
 })
 
-        const game = new Game({
-            el: document.body,
-            width: 500,
-            height: 500,
-            background: 'green',
-            scenes: [mainScene]
-        })
+    const game = new Game({
+        el: document.body,
+        width: 500,
+        height: 500,
+        background: 'green',
+        scenes: [mainScene]
+    })
 
    </script>
 </body>
