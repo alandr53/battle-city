@@ -61,7 +61,6 @@
                 scene.tick(timestamp)
             }
 
-
             this.renderer.clear()
 
         for (const scene of startedScenes) {

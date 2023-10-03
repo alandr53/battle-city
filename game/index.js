@@ -28,7 +28,7 @@ mainScene = new Scene({
                                   }
                                })
 
-                             
+                               this.man.setFrameByKeys('man', 'down', 'frame1')
                                this.add(this.man)
                            },
 

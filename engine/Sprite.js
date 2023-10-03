@@ -11,7 +11,7 @@
 
             this.texture = texture
 
-            this.frames = args.atlas || []
+            this.frames = args.frames || []
 
             this.velocity = {
                 x: velocity.x || 0,
