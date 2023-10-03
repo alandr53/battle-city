@@ -10,9 +10,11 @@ mainScene = new Scene({
                            },
                            init() {
                                const manTexture = this.parent.loader.getImage('man')
+                               const manAtlas = this.parent.loader.getJson('manAtlas')
+                              
 
                                this.man = new Body(manTexture, {
-                                  // scale:  0.25, //21:56
+                                   frames: manAtlas.frames,
                                    anchorX: 0.5,
                                    anchorY: 0.5,
                                    x:      this.parent.renderer.canvas.width / 2,

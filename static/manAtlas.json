@@ -1,11 +1,33 @@
 {
     "frames": [
         {
-            "keys": [],
-            "x": 0,
-            "y": 0,
-            "width": 0,
-            "height": 0
+            "keys": ["man", "down", "frame1"],
+            "x": 14,
+            "y": 12,
+            "width": 34,
+            "height": 48
+        },
+
+        {
+            "keys": ["man", "down", "frame2"],
+            "x": 78,
+            "y": 10,
+            "width": 34,
+            "height": 53
+        },
+        {
+            "keys": ["man", "down", "frame3"],
+            "x": 142,
+            "y": 12,
+            "width": 34,
+            "height": 48
+        },
+        {
+            "keys": ["man", "down", "frame4"],
+            "x": 206,
+            "y": 10,
+            "width": 34,
+            "height": 52
         }
     ]
 }

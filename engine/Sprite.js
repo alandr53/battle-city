@@ -4,10 +4,14 @@
     class Sprite extends GameEngine.DisplayObject {
         constructor(texture, args = {}){
             super(args)
+
+
             const frame = args.frame || { }
             const velocity = args.velocity || { }
 
             this.texture = texture
+
+            this.frames = args.atlas || []
 
             this.velocity = {
                 x: velocity.x || 0,
@@ -34,6 +38,37 @@
         tick (timestamp) {
             this.x += this.velocity.x
             this.y += this.velocity.y
+        }
+
+        setFrameByKeys (...keys) {
+            const frame = this.getFrameByKeys(...keys)
+
+            if(!frame) {
+                return false
+            }
+
+            this.frame.x = frame.x
+            this.frame.y = frame.y
+            this.frame.width = frame.width
+            this.frame.height = frame.height
+        }
+
+        getFrameByKeys (...keys) {
+            let flag = false
+            
+            for (const frame of this.frames) {
+                flag = true
+
+                for (const key of keys) {
+                    if (!frame.keys.includes(key)) {
+                        flag = false
+                        break
+                    }
+                }
+                if (flag) {
+                    return frame
+                }
+            }
         }
 
         draw (canvas, context) {
