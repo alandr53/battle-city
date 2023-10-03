@@ -9,37 +9,9 @@ class Renderer {
         this.background = args.background || 'black'
         this.canvas.width = args.width || 50
         this.canvas.height = args.height || 50
-
-        //this.stage = new GameEngine.Container()
-
-
     }
-   /* get displayObjects() {
-        return _getDisplayObjects(this.stage)
-
-        function _getDisplayObjects (container, result = [] ) { 
-            for (const displayObject of container.displayObjects) {
-                if (displayObject instanceof GameEngine.Container) {
-                    _getDisplayObjects(displayObject, result)
-                }
-                else {
-                    result.push(displayObject)
-                }
-            }
-            return result 
-        }
-    }*/
-   
-  /*  render() {
-        this.stage.draw(this.canvas, this.context)
-    }*/
-
-   /* draw (callback) {
-        callback(this.canvas, this.context)
-    }*/
-
-    clear () {
-       
+ 
+    clear () {      
             this.context.fillStyle = this.background 
             this.context.beginPath()
             this.context.rect(0, 0, this.canvas.width, this.canvas.height)

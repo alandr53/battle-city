@@ -1,4 +1,4 @@
-const {Body, Game, Scene, Point, Line, Container} = GameEngine
+const {Body, Game, Scene, Point, Line, Container, Util} = GameEngine
 
 mainScene = new Scene({
                            autoStart: true,
@@ -11,10 +11,10 @@ mainScene = new Scene({
                            init() {
                                const manTexture = this.parent.loader.getImage('man')
                                const manAtlas = this.parent.loader.getJson('manAtlas')
-                              
+                              console.log(manAtlas)
 
                                this.man = new Body(manTexture, {
-                                   frames: manAtlas.frames,
+                                scale: 0.5,
                                    anchorX: 0.5,
                                    anchorY: 0.5,
                                    x:      this.parent.renderer.canvas.width / 2,
@@ -27,8 +27,14 @@ mainScene = new Scene({
                                         height: 0.5
                                   }
                                })
+                               this.man.setFramesCollection(manAtlas.frames)
+                               this.man.setAnimationsCollection(manAtlas.actions)
+                               //this.man.startAnimation('moveDown')
 
-                               this.man.setFrameByKeys('man', 'down', 'frame1')
+                           //    this.man.setFrameByKeys('man', 'down', 'frame1')
+                            //   this.man.width = this.man.frame.width
+                             //  this.man.height = this.man.frame.height
+
                                this.add(this.man)
                            },
 
