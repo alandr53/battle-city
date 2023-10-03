@@ -54,8 +54,14 @@
           const startedScenes = this.scenes.filter(x => x.status === 'started')
 
        for (const scene of startedScenes) {
-                    scene.update(timestamp)
+                scene.update(timestamp)
             }
+
+        for (const scene of startedScenes) {
+                scene.tick(timestamp)
+            }
+
+
             this.renderer.clear()
 
         for (const scene of startedScenes) {

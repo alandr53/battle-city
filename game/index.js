@@ -5,20 +5,19 @@ mainScene = new Scene({
                            name: 'mainScene',
 
                            loading(loader) {
-                               loader.addImage('cola', 'static/cola.jpeg')
-                               loader.addJson('persons', 'static/persons.json')
+                               loader.addImage('man', 'static/_man.png')
+                               loader.addJson('manAtlas', 'static/manAtlas.json')
                            },
                            init() {
-                               const colaTexture = this.parent.loader.getImage('cola')
-                               const graphicContainer = new Container
+                               const manTexture = this.parent.loader.getImage('man')
 
-                               this.cola = new Body(colaTexture, {
-                                   scale:  0.5,
+                               this.man = new Body(manTexture, {
+                                   scale:  0.1, //21:56
                                    anchorX: 0.5,
                                    anchorY: 0.5,
                                    x:      this.parent.renderer.canvas.width / 2,
                                    y:      this.parent.renderer.canvas.height / 2,
-                                   debug: true,
+                                   //debug: true,
                                    body: {
                                         x: 0,
                                         y: 0.5,
@@ -28,20 +27,21 @@ mainScene = new Scene({
                                })
 
                              
-                               this.add(this.cola)
+                               this.add(this.man)
                            },
 
                            update(timestamp) {
                             const {keyboard} = this.parent
 
-                            let speedRotation = keyboard.space ? Math.PI / 100 : Math.PI / 200
+                            this.man.velocity.x = 0
+                            this.man.velocity.y = 0
 
                                if (keyboard.arrowUp) {
-                                this.cola.rotation += speedRotation
+                                this.man.velocity.y = -5
                                }
 
                                if (keyboard.arrowDown) {
-                                this.cola.rotation -= speedRotation
+                                this.man.velocity.y = 5
                                }
                              
                            }
@@ -51,12 +51,11 @@ mainScene = new Scene({
        el: document.body,
        width: 500,
        height: 500,
-       background: 'green',
+       background: 'white',
        scenes: [mainScene]
    })
 
    // https://www.obuka.org/course/webcademy-igra-tanchiki-na-javascript-intensiv/9598-den-415/?p=1
 
-   // Day-4 || 1:45
 
    //https://github.com/alandr53/battle-city

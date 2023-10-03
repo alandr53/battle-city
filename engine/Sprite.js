@@ -5,8 +5,14 @@
         constructor(texture, args = {}){
             super(args)
             const frame = args.frame || { }
+            const velocity = args.velocity || { }
 
             this.texture = texture
+
+            this.velocity = {
+                x: velocity.x || 0,
+                y: velocity.y || 0
+            }
 
             this.frame = {
                 x: frame.x || 0,
@@ -23,6 +29,11 @@
                 this.height = this.frame.height
             }
 
+        }
+
+        tick (timestamp) {
+            this.x += this.velocity.x
+            this.y += this.velocity.y
         }
 
         draw (canvas, context) {
