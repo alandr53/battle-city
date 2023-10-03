@@ -5,14 +5,14 @@ mainScene = new Scene({
                            name: 'mainScene',
 
                            loading(loader) {
-                               loader.addImage('man', 'static/_man.png')
+                               loader.addImage('man', 'static/man.png')
                                loader.addJson('manAtlas', 'static/manAtlas.json')
                            },
                            init() {
                                const manTexture = this.parent.loader.getImage('man')
 
                                this.man = new Body(manTexture, {
-                                   scale:  0.1, //21:56
+                                  // scale:  0.25, //21:56
                                    anchorX: 0.5,
                                    anchorY: 0.5,
                                    x:      this.parent.renderer.canvas.width / 2,
