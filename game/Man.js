@@ -24,3 +24,4 @@ class Man extends GameEngine.Body {
 
 Man.texture = null
 Man.atlas = null
+//
