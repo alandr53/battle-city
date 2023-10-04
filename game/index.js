@@ -1,4 +1,4 @@
-const {Body, Game, Scene, Point, Line, Container, Util} = GameEngine
+const {Body, Game, Scene, ArcadePhysics} = GameEngine
 
 mainScene = new Scene({
                            autoStart: true,
@@ -8,48 +8,54 @@ mainScene = new Scene({
                                loader.addImage('man', 'static/man.png')
                                loader.addJson('manAtlas', 'static/manAtlas.json')
                            },
+
                            init() {
-                               const manTexture = this.parent.loader.getImage('man')
-                               const manAtlas = this.parent.loader.getJson('manAtlas')
-                              console.log(manAtlas)
+                               Man.texture = this.parent.loader.getImage('man')
+                               Man.atlas = this.parent.loader.getJson('manAtlas')
 
-                               this.man = new Body(manTexture, {
-                                scale: 0.5,
-                                   anchorX: 0.5,
-                                   anchorY: 0.5,
-                                   x:      this.parent.renderer.canvas.width / 2,
-                                   y:      this.parent.renderer.canvas.height / 2,
-                                   //debug: true,
-                                   body: {
-                                        x: 0,
-                                        y: 0.5,
-                                        width: 1,
-                                        height: 0.5
-                                  }
-                               })
-                               this.man.setFramesCollection(manAtlas.frames)
-                               this.man.setAnimationsCollection(manAtlas.actions)
-                               //this.man.startAnimation('moveDown')
+                                this.arcadePhysics = new ArcadePhysics
 
-                           //    this.man.setFrameByKeys('man', 'down', 'frame1')
-                            //   this.man.width = this.man.frame.width
-                             //  this.man.height = this.man.frame.height
+                               this.man1 = new Man({            
+                                            x: this.parent.renderer.canvas.width / 2 - 100,
+                                            y: this.parent.renderer.canvas.height / 2,
+                                        })
 
-                               this.add(this.man)
+                                this.man2 = new Man({            
+                                            x: this.parent.renderer.canvas.width / 2 + 100,
+                                            y: this.parent.renderer.canvas.height / 2,
+                                        })
+
+
+                               this.add(this.man1, this.man2)
                            },
 
                            update(timestamp) {
                             const {keyboard} = this.parent
 
-                            this.man.velocity.x = 0
-                            this.man.velocity.y = 0
+                            this.man1.velocity.x = 0
+                            this.man1.velocity.y = 0
 
-                               if (keyboard.arrowUp) {
-                                this.man.velocity.y = -5
+                            this.man2.velocity.x = 0
+                            this.man2.velocity.y = 0
+
+                               if (keyboard.arrowLeft) {
+                                this.man1.velocity.x = -2
+
+                                if(this.man1.animation !== 'moveLeft') {
+                                    this.man1.startAnimation('moveLeft')
+                                }                               
                                }
 
-                               if (keyboard.arrowDown) {
-                                this.man.velocity.y = 5
+                               else if (keyboard.arrowDown) {
+                                this.man1.velocity.y = +2
+
+                                if(this.animation !== 'moveDown') {
+                                    this.man1.startAnimation('moveDown')
+                                }                              
+                               }
+
+                               else if (this.man1.animation === 'moveDown') {
+                               this.man1.startAnimation('stayDown')
                                }
                              
                            }
@@ -59,7 +65,7 @@ mainScene = new Scene({
        el: document.body,
        width: 500,
        height: 500,
-       background: 'white',
+       background: 'gray',
        scenes: [mainScene]
    })
 
