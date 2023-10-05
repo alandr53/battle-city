@@ -5,11 +5,35 @@ mainScene = new Scene({
                            name: 'mainScene',
 
                            loading(loader) {
-                               loader.addImage('man', 'static/man.png')
-                               loader.addJson('manAtlas', 'static/manAtlas.json')
+                               loader.addImage('spriteSheet', 'static/Battle City Sprites.png')
+                               loader.addJson('atlas', 'static/atlas.json')
+                               
+                           },
+                           init () {
+                            Tank.texture = this.parent.loader.getImage('spriteSheet')
+                            Tank.atlas = this.parent.loader.getJson('atlas')
+
+                            Bullet.texture = this.parent.loader.getImage('spriteSheet')
+                            Bullet.atlas = this.parent.loader.getJson('atlas')
+
+                            this.arcadePhysics = new ArcadePhysics
+                            
+                            this.tank = new Tank({
+                                debug: true,
+                                x: this.parent.renderer.canvas.width / 2 - 100,
+                                y: this.parent.renderer.canvas.height / 2,
+                            })
+
+                            this.add(this.tank)
+                            this.arcadePhysics.add(this.tank)
                            },
 
-                           init() {
+                           update () {
+                            this.tank.movementUpdate(this.parent.keyboard)
+                            this.arcadePhysics.processing()
+                           }
+
+           /*                init() {
                                Man.texture = this.parent.loader.getImage('man')
                                Man.atlas = this.parent.loader.getJson('manAtlas')
 
@@ -69,7 +93,7 @@ mainScene = new Scene({
                                 this.man1.startAnimation('stayDown')
                                }
                                this.arcadePhysics.processing()
-                           }
+                           }*/
 })
 
    const game = new Game({

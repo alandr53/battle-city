@@ -69,7 +69,7 @@
 
                 if (this.debug) {
                     const { x, y, width, height } = this.bodyRect
-                    context.fillStyle = 'rgba(255, 0, 0, 0.5)'
+                    context.fillStyle = 'rgba(255, 0, 0, 0.2)'
                     context.beginPath()
                     context.rect( x - this.x, y - this.y, width, height )
                     context.fill()

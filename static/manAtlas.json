@@ -1,14 +1,14 @@
 {
     "actions": {
             "stayDown": {
-                "frames": [
+                "keys": [
                     ["man", "down", "frame1"]
                 ]
             },
             
             "moveDown": {
                 "duration": 500,
-                "frames": [
+                "keys": [
                     ["man", "down", "frame1"],
                     ["man", "down", "frame2"],
                     ["man", "down", "frame3"],
@@ -18,7 +18,7 @@
 
             "moveLeft": {
                 "duration": 500,
-                "frames": [
+                "keys": [
                     ["man", "left", "frame1"],
                     ["man", "left", "frame2"],
                     ["man", "left", "frame3"],
