@@ -38,10 +38,7 @@
 
 
         isInside(x, y) {
-            const bodyRect = this.bodyRect
-
-            return bodyRect.x < x && x < bodyRect.x + bodyRect.width
-                && bodyRect.y < y && y < bodyRect.y + bodyRect.height
+            return GameEngine.Util.isInside({x, y}, this.bodyRect)
 
         }
 

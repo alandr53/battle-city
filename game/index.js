@@ -27,6 +27,8 @@ mainScene = new Scene({
 
 
                                this.add(this.man1, this.man2)
+                               this.arcadePhysics.add(this.man1, this.man2)
+                               
                            },
 
                            update(timestamp) {
@@ -60,13 +62,13 @@ mainScene = new Scene({
 
                                else if (keyboard.arrowUp) {
                                 this.man1.velocity.y = -2
-                           }
+                                }
 
 
                                else if (this.man1.animation === 'moveDown') {
                                 this.man1.startAnimation('stayDown')
                                }
-                             
+                               this.arcadePhysics.processing()
                            }
 })
 

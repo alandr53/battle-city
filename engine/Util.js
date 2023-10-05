@@ -27,6 +27,11 @@
          return uid
     }
 
+    Util.isInside = function isInside(point, rect) {
+        return rect.x < point.x && point.x < rect.x + rect.width
+            && rect.y < point.y && point.y < rect.y + rect.height
+    }
+
     window.GameEngine = window.GameEngine || {}
     window.GameEngine.Util = Util
 

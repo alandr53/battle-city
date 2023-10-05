@@ -19,6 +19,10 @@ class Man extends GameEngine.Body {
         this.setFramesCollection(Man.atlas.frames)
         this.setAnimationsCollection(Man.atlas.actions)
         this.startAnimation('stayDown')
+
+        this.on('collision', (a, b) => {
+            console.log(a, b)
+        })
     }
 }
 
