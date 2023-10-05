@@ -41,21 +41,30 @@ mainScene = new Scene({
                                if (keyboard.arrowLeft) {
                                 this.man1.velocity.x = -2
 
-                                if(this.man1.animation !== 'moveLeft') {
-                                    this.man1.startAnimation('moveLeft')
-                                }                               
+                                    if(this.man1.animation !== 'moveLeft') {
+                                        this.man1.startAnimation('moveLeft')
+                                    }                               
                                }
 
                                else if (keyboard.arrowDown) {
                                 this.man1.velocity.y = +2
 
-                                if(this.animation !== 'moveDown') {
-                                    this.man1.startAnimation('moveDown')
-                                }                              
+                                    if(this.animation !== 'moveDown') {
+                                        this.man1.startAnimation('moveDown')
+                                    }                              
                                }
 
+                               else if (keyboard.arrowRight) {
+                                    this.man1.velocity.x = 2
+                               }
+
+                               else if (keyboard.arrowUp) {
+                                this.man1.velocity.y = -2
+                           }
+
+
                                else if (this.man1.animation === 'moveDown') {
-                               this.man1.startAnimation('stayDown')
+                                this.man1.startAnimation('stayDown')
                                }
                              
                            }
