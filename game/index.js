@@ -1,4 +1,6 @@
-const {Body, Game, Scene, ArcadePhysics} = GameEngine
+const DEBUG_MODE = true
+
+const {Body, Game, Scene, ArcadePhysics, Util} = GameEngine
 
 mainScene = new Scene({
                            autoStart: true,
@@ -19,7 +21,7 @@ mainScene = new Scene({
                             this.arcadePhysics = new ArcadePhysics
                             
                             this.tank = new Tank({
-                                debug: true,
+                                debug: DEBUG_MODE,
                                 x: this.parent.renderer.canvas.width / 2 - 100,
                                 y: this.parent.renderer.canvas.height / 2,
                             })
@@ -29,7 +31,26 @@ mainScene = new Scene({
                            },
 
                            update () {
-                            this.tank.movementUpdate(this.parent.keyboard)
+                            const { keyboard } = this.parent
+                            
+                            this.tank.movementUpdate(keyboard)
+
+                            if (keyboard.space && Util.delay('tank' + this.tank.uid, Tank.BULLET_TIMEOUT)) {
+                                const bullet = new Bullet({
+                                    debug: DEBUG_MODE,
+                                    x: this.tank.x,
+                                    y: this.tank.y
+                                })
+                    
+                                this.tank.bullets.push(bullet)
+                                bullet.tank = this.tank
+                    
+                                if (this.tank.animation === 'moveUp') {
+                                    bullet.velocity.y -= Bullet.NORMAL_SPEED
+                                    bullet.setFrameByKeys('bullet', 'up')
+                                }
+                                this.add(bullet)
+                            }
                             this.arcadePhysics.processing()
                            }
 

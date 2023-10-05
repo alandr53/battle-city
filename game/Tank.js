@@ -37,25 +37,13 @@ class Tank extends GameEngine.Body {
         else if (keyboard.arrowUp) {
             this.velocity.y = -Tank.NORMAL_SPEED
         }
-        if (keyboard.space) {
-            const bullet = new Bullet({
-                x: this.x,
-                y: this.y
-            })
 
-            this.bullets.push(bullet)
-            bullet.tank = this
-
-            if (this.animation === 'moveUp') {
-                bullet.velocity.y -= Bullet.NORMAL_SPEED
-                bullet.setFrameByKeys('bullet', 'up')
-            }
-            this.parent.add(bullet)
-        }
     }
 }
 
 Tank.texture = null
 Tank.atlas = null
+
 Tank.NORMAL_SPEED = 2
+Tank.BULLET_TIMEOUT = 1000
 //
