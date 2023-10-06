@@ -1,9 +1,12 @@
 ;(function(){
     'use strict'
 
-class DisplayObject {
+class DisplayObject extends GameEngine.EventEmitter {
 
     constructor(args = {}) {
+        super()
+
+        this.uid = GameEngine.Util.generateUid()
         this.x = args.x || 0
         this.y = args.y || 0
 
@@ -19,6 +22,7 @@ class DisplayObject {
         this.scaleY = args.scaleY || 1
 
         this.parent = null
+        this.visible = true
 
         if(args.scale != undefined) {
             this.setScale(args.scale)
@@ -26,21 +30,21 @@ class DisplayObject {
     }
 
     get absoluteX () { 
-        return this.x - this.anchorX * this.width
+        return this.x - this.anchorX * this.width * this.scaleX
     }
 
     set absoluteX(value) { 
-        this.x = value + this.anchorX * this.width
+        this.x = value + this.anchorX * this.width * this.scaleX
        
         return value
     }
 
     get absoluteY () {
-        return  this.y - this.anchorY * this.height
+        return  this.y - this.anchorY * this.height * this.scaleY
     }
 
     set absoluteY (value) { 
-        this.y = value + this.anchorY * this.height
+        this.y = value + this.anchorY * this.height * this.scaleY
     }
 
     setScale (scale) {
@@ -49,17 +53,21 @@ class DisplayObject {
     }
 
     setParent(parent) {
-        if(this.parent) {
+        if(this.parent && this.parent.remove) {
             this.parent.remove(this)
         }
-        if(parent) {
+
+        if(parent && parent.add) {
             parent.add(this)
-            this.parent = parent
-        }
-        
+        } 
+            this.parent = parent           
     }
 
-    draw () { }
+    draw (callback) {
+        if(this.visible) {
+            callback() 
+        }
+     }
 
 }
 
