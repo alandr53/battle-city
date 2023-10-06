@@ -25,8 +25,8 @@ class Tank extends GameEngine.Body {
                 }
             }
             a.velocity.x = 0
-            a.velocity.x = 0
-            //console.log(a, b)
+            a.velocity.y = 0
+            console.log(a, b)
         })
     }
 

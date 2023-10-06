@@ -23,7 +23,7 @@ class Man extends GameEngine.Body {
         this.on('collision', (a, b) => {
             a.startAnimation('stayDown')
             a.velocity.x = 0
-            a.velocity.x = 0
+            a.velocity.y = 0
             //console.log(a, b)
         })
     }

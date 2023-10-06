@@ -35,6 +35,22 @@ mainScene = new Scene({
 
                             this.add(this.tank1, this.tank2)
                             this.arcadePhysics.add(this.tank1, this.tank2)
+
+                            this.arcadePhysics.add(new Body(null, {
+                                static: true,
+                                x: -10,
+                                y: -10,
+                                width: this.parent.renderer.canvas.width + 20,
+                                height: 10
+                            }))
+
+                            this.arcadePhysics.add(new Body(null, {
+                                static: true,
+                                x: -10,
+                                y: -10,
+                                width: 10,
+                                height: this.parent.renderer.canvas.height + 20
+                            }))
                            },
 
                            update () {

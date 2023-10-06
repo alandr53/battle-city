@@ -34,6 +34,10 @@ class ArcadePhysics {
                 const vxB = b.velocity.x
                 const vyB = b.velocity.y
 
+                if (a.static && b.static) {
+                    continue
+                }
+
                 let crossing = false
 
                 for (const topA of topsA) {
@@ -75,7 +79,7 @@ class ArcadePhysics {
                     }
                 }
                 if (crossing) {
-                    console.log(a, b)
+                     console.log(a, b)
                     a.emit('collision', a, b)
                     b.emit('collision', b, a)
                 }
