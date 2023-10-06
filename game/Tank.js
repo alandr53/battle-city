@@ -15,6 +15,15 @@ class Tank extends GameEngine.Body {
         this.startAnimation('moveUp')
 
         this.on('collision', (a, b) => {
+            if (b instanceof Bullet) {
+                if(this.bullets.includes(b)) {
+                    return
+                }
+                else {
+                    this.visible = false
+                    Util.getScene(this).arcadePhysics.remove(this)
+                }
+            }
             a.velocity.x = 0
             a.velocity.x = 0
             //console.log(a, b)
