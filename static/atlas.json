@@ -1,0 +1,103 @@
+{
+    "actions": {
+            "moveUp": {
+                "duration": 300,
+                "keys": [
+                    ["tank", "yellow", "type1", "up", "frame1"],
+                    ["tank", "yellow", "type1", "up", "frame2"]
+                ]
+            }
+
+        },
+    
+    
+    "frames": [
+        {
+            "keys": ["tank", "yellow", "type1", "up", "frame1"],
+            "x": 2,
+            "y": 4,
+            "width": 26,
+            "height": 26
+        },
+
+        {
+            "keys": ["tank", "yellow", "type1", "up", "frame2"],
+            "x": 34,
+            "y": 4,
+            "width": 26,
+            "height": 26
+        },
+        {
+            "keys": ["tank", "yellow", "type1", "left", "frame1"],
+            "x": 196,
+            "y": 2,
+            "width": 26,
+            "height": 26
+        },
+        {
+            "keys": ["tank", "yellow", "type1", "left", "frame2"],
+            "x": 228,
+            "y": 2,
+            "width": 26,
+            "height": 26
+        },
+
+        {
+            "keys": ["tank", "yellow", "type1", "down", "frame1"],
+            "x": 130,
+            "y": 2,
+            "width": 26,
+            "height": 26
+        },
+
+        {
+            "keys": ["tank", "yellow", "type1", "down", "frame2"],
+            "x": 162,
+            "y": 2,
+            "width": 26,
+            "height": 26
+        },
+        {
+            "keys": ["tank", "yellow", "type1", "right", "frame1"],
+            "x": 66,
+            "y": 2,
+            "width": 26,
+            "height": 26
+        },
+        {
+            "keys": ["tank", "yellow", "type1", "right", "frame2"],
+            "x": 98,
+            "y": 2,
+            "width": 26,
+            "height": 26
+        },
+        {
+            "keys": ["bullet", "up"],
+            "x": 512,
+            "y": 0,
+            "width": 6,
+            "height": 8
+        },
+        {
+            "keys": ["bullet", "left"],
+            "x": 560,
+            "y": 0,
+            "width": 8,
+            "height": 6
+        },        {
+            "keys": ["bullet", "down"],
+            "x": 544,
+            "y": 0,
+            "width": 6,
+            "height": 8
+        },
+        {
+            "keys": ["bullet", "right"],
+            "x": 528,
+            "y": 0,
+            "width": 8,
+            "height": 6
+        }
+
+    ]
+}
