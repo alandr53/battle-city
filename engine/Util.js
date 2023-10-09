@@ -48,6 +48,46 @@
         return Util.getScene(obj.parent)
     }
 
+    Util.tween = function tween (params) {
+        let { target,  duration, processer } = params
+
+        if(!target) {
+            throw new Error('Tween without target object.')
+        }
+        
+        let createAt = Date.now()
+        let context = {} 
+        let stopped = false
+
+        let tweenFunction = () => {
+            const percent = Math.min((Date.now() - createAt) / duration, 1)
+            processer(target, percent, context)
+
+            if (percent >= 1) {
+                stopped = true
+                context = null
+                target = null
+                processer = null
+                tweenFunction = null
+                clearInterval(intervalFlag)
+            }
+        }
+        tweenFunction()
+
+        const intervalFlag = setInterval(tweenFunction)
+       return () => {
+        if(stopped) {
+            return
+        }
+        stopped = true
+        context = null
+        target = null
+        processer = null
+        tweenFunction = null
+        clearInterval(intervalFlag)
+    }
+    }
+
     window.GameEngine = window.GameEngine || {}
     window.GameEngine.Util = Util
 

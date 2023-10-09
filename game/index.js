@@ -94,23 +94,9 @@ mainScene = new Scene({
 
 })
 
-const intro = new Intro({
-    name: 'introScene',
-    autoStart: true,
-    loading (loader) {
-        loader.addImage('intro', 'static/intro.png')
-    },
 
-    init () {
-        const {loader} = this.parent
-        this.image = new Sprite(loader.getImage('intro'),{
-            x: 0,
-            y: 0,
-            width: this.parent.renderer.canvas.width,
-            height: this.parent.renderer.canvas.height
-        })
-        this.add(this.image)
-    }
+const partyScene = new Party ({
+    
 })
 
    const game = new Game({
@@ -118,7 +104,9 @@ const intro = new Intro({
        width: 500,
        height: 500,
        background: 'gray',
-       scenes: [intro, mainScene]
+       scenes: [
+        new Intro( )
+       ]
    })
 
    // https://www.obuka.org/course/webcademy-igra-tanchiki-na-javascript-intensiv/9598-den-415/?p=1
