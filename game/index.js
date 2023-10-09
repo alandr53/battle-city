@@ -1,17 +1,23 @@
 const DEBUG_MODE = true
 
-const {Body, Game, Scene, ArcadePhysics, Util} = GameEngine
+const {Body, Game, Scene, ArcadePhysics, Util, Sprite} = GameEngine
 
 mainScene = new Scene({
-                           autoStart: true,
+                           //autoStart: true,
                            name: 'mainScene',
 
                            loading(loader) {
                                loader.addImage('spriteSheet', 'static/Battle City Sprites.png')
                                loader.addJson('atlas', 'static/atlas.json')
+                               loader.addSound('start','static/sound/stage_start.ogg')
                                
                            },
                            init () {
+
+                            const startSound = this.parent.loader.getSound('start')
+
+                            startSound.play()
+
                             Tank.texture = this.parent.loader.getImage('spriteSheet')
                             Tank.atlas = this.parent.loader.getJson('atlas')
 
@@ -86,67 +92,25 @@ mainScene = new Scene({
                             }
                            }
 
-           /*                init() {
-                               Man.texture = this.parent.loader.getImage('man')
-                               Man.atlas = this.parent.loader.getJson('manAtlas')
+})
 
-                                this.arcadePhysics = new ArcadePhysics
+const intro = new Intro({
+    name: 'introScene',
+    autoStart: true,
+    loading (loader) {
+        loader.addImage('intro', 'static/intro.png')
+    },
 
-                               this.man1 = new Man({            
-                                            x: this.parent.renderer.canvas.width / 2 - 100,
-                                            y: this.parent.renderer.canvas.height / 2,
-                                        })
-
-                                this.man2 = new Man({            
-                                            x: this.parent.renderer.canvas.width / 2 + 100,
-                                            y: this.parent.renderer.canvas.height / 2,
-                                        })
-
-
-                               this.add(this.man1, this.man2)
-                               this.arcadePhysics.add(this.man1, this.man2)
-                               
-                           },
-
-                           update(timestamp) {
-                            const {keyboard} = this.parent
-
-                            this.man1.velocity.x = 0
-                            this.man1.velocity.y = 0
-
-                            this.man2.velocity.x = 0
-                            this.man2.velocity.y = 0
-
-                               if (keyboard.arrowLeft) {
-                                this.man1.velocity.x = -2
-
-                                    if(this.man1.animation !== 'moveLeft') {
-                                        this.man1.startAnimation('moveLeft')
-                                    }                               
-                               }
-
-                               else if (keyboard.arrowDown) {
-                                this.man1.velocity.y = +2
-
-                                    if(this.animation !== 'moveDown') {
-                                        this.man1.startAnimation('moveDown')
-                                    }                              
-                               }
-
-                               else if (keyboard.arrowRight) {
-                                    this.man1.velocity.x = 2
-                               }
-
-                               else if (keyboard.arrowUp) {
-                                this.man1.velocity.y = -2
-                                }
-
-
-                               else if (this.man1.animation === 'moveDown') {
-                                this.man1.startAnimation('stayDown')
-                               }
-                               this.arcadePhysics.processing()
-                           }*/
+    init () {
+        const {loader} = this.parent
+        this.image = new Sprite(loader.getImage('intro'),{
+            x: 0,
+            y: 0,
+            width: this.parent.renderer.canvas.width,
+            height: this.parent.renderer.canvas.height
+        })
+        this.add(this.image)
+    }
 })
 
    const game = new Game({
@@ -154,7 +118,7 @@ mainScene = new Scene({
        width: 500,
        height: 500,
        background: 'gray',
-       scenes: [mainScene]
+       scenes: [intro, mainScene]
    })
 
    // https://www.obuka.org/course/webcademy-igra-tanchiki-na-javascript-intensiv/9598-den-415/?p=1
