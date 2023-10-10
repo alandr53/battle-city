@@ -5,7 +5,7 @@ class Tank extends GameEngine.Body {
             scale: 3,
             anchorX: 0.5,
             anchorY: 0.5,
-            keysDefault: [ 'yellow', 'type1']
+            keysDefault: [ 'gray', 'type1']
         }, originalArgs)
         
         super(Tank.texture, args)
@@ -60,6 +60,10 @@ class Tank extends GameEngine.Body {
             if (this.animation !== 'moveUp') {
                 this.startAnimation('moveUp')
             }
+        }
+        
+        else {
+            this.stopAnimation()
         }
 
     }

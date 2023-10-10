@@ -63,6 +63,10 @@
             this.setFrameByKeys( ...keys[0] )
         }
 
+        stopAnimation() {
+            this.frameDelay = Infinity
+        }
+
         setFrameByKeys (...keys) {
             const frame = this.getFrameByKeys(...keys, ...this.keysDefault)
 
