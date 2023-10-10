@@ -5,7 +5,8 @@ class Tank extends GameEngine.Body {
             scale: 3,
             anchorX: 0.5,
             anchorY: 0.5,
-            keysDefault: [ 'gray', 'type1']
+            keysDefault: [ 'gray', 'type1'],
+            debug: DEBUG_MODE,
         }, originalArgs)
         
         super(Tank.texture, args)
@@ -35,6 +36,10 @@ class Tank extends GameEngine.Body {
         this.velocity.x = 0
         this.velocity.y = 0
 
+        if (this.animationPaused) {
+           this.resumeAnimation() 
+        }
+
         if (keyboard.arrowLeft) {
             this.velocity.x = -Tank.NORMAL_SPEED
 
@@ -63,7 +68,38 @@ class Tank extends GameEngine.Body {
         }
         
         else {
-            this.stopAnimation()
+            this.pauseAnimation()
+        }
+
+        if (keyboard.space && Util.delay('tank' + this.uid, Tank.BULLET_TIMEOUT)) {
+            const bullet = new Bullet({
+                debug: DEBUG_MODE,
+                x: this.x,
+                y: this.y
+            })
+
+            this.bullets.push(bullet)
+            bullet.tank = this
+ 
+            if (this.animation === 'moveUp') {
+                bullet.velocity.y = -Bullet.NORMAL_SPEED
+                bullet.setFrameByKeys('bullet', 'up')
+            }
+            else if (this.animation === 'moveLeft') {
+                bullet.velocity.x = -Bullet.NORMAL_SPEED
+                bullet.setFrameByKeys('bullet', 'left')
+            }
+            else if (this.animation === 'moveRight') {
+                bullet.velocity.x = Bullet.NORMAL_SPEED
+                bullet.setFrameByKeys('bullet', 'right')
+            }
+            else if (this.animation === 'moveDown') {
+                bullet.velocity.y = Bullet.NORMAL_SPEED
+                bullet.setFrameByKeys('bullet', 'down')
+            }
+            const scene = Util.getScene(this)
+            scene.add(bullet)
+            scene.arcadePhysics.add(bullet)
         }
 
     }
@@ -73,5 +109,5 @@ Tank.texture = null
 Tank.atlas = null
 
 Tank.NORMAL_SPEED = 2
-Tank.BULLET_TIMEOUT = 1000
+Tank.BULLET_TIMEOUT = 250
 //

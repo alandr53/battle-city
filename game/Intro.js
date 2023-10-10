@@ -18,11 +18,6 @@ class Intro extends GameEngine.Scene {
 
         const {loader} = this.parent
 
-        Tank.texture = loader.getImage('spriteSheet')
-        Tank.atlas = loader.getJson('atlas')
-
-        Bullet.texture = loader.getImage('spriteSheet')
-        Bullet.atlas = loader.getJson('atlas')
 
        
         this.image = new Sprite(loader.getImage('intro'),{

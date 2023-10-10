@@ -18,6 +18,7 @@
 
             this.animations = {}
             this.animation = ''
+            this.animationPaused = false 
 
             this.velocity = {
                 x: velocity.x || 0,
@@ -63,8 +64,12 @@
             this.setFrameByKeys( ...keys[0] )
         }
 
-        stopAnimation() {
-            this.frameDelay = Infinity
+        pauseAnimation() {
+            this.animationPaused = true
+        }
+
+        resumeAnimation() {
+            this.animationPaused = false
         }
 
         setFrameByKeys (...keys) {
@@ -102,7 +107,7 @@
         }
 
         tick (timestamp) {
-            if (this.animation && GameEngine.Util.delay(this.animation + this.uid, this.frameDelay)) {
+            if (!this.animationPaused && this.animation && GameEngine.Util.delay(this.animation + this.uid, this.frameDelay)) {
                 const {keys} = this.animations[this.animation]
 
                 this.frameNumber = (this.frameNumber + 1) % keys.length
