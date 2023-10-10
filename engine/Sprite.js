@@ -10,6 +10,7 @@
             const velocity = args.velocity || { }
 
             this.texture = texture
+            this.keysDefault = args.keysDefault || []
 
             this.frames = []
             this.frameNumber = 0
@@ -63,7 +64,7 @@
         }
 
         setFrameByKeys (...keys) {
-            const frame = this.getFrameByKeys(...keys)
+            const frame = this.getFrameByKeys(...keys, ...this.keysDefault)
 
             if(!frame) {
                 return false

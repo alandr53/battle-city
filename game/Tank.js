@@ -5,6 +5,7 @@ class Tank extends GameEngine.Body {
             scale: 3,
             anchorX: 0.5,
             anchorY: 0.5,
+            keysDefault: [ 'yellow', 'type1']
         }, originalArgs)
         
         super(Tank.texture, args)
@@ -36,15 +37,29 @@ class Tank extends GameEngine.Body {
 
         if (keyboard.arrowLeft) {
             this.velocity.x = -Tank.NORMAL_SPEED
+
+            if (this.animation !== 'moveLeft') {
+                this.startAnimation('moveLeft')
+            }
         }
        else if (keyboard.arrowRight) {
             this.velocity.x = Tank.NORMAL_SPEED
+            if (this.animation !== 'moveRight') {
+                this.startAnimation('moveRight')
+            }
         }
         else if (keyboard.arrowDown) {
             this.velocity.y = Tank.NORMAL_SPEED
+            if (this.animation !== 'moveDown') {
+                this.startAnimation('moveDown')
+            }
         }
         else if (keyboard.arrowUp) {
             this.velocity.y = -Tank.NORMAL_SPEED
+
+            if (this.animation !== 'moveUp') {
+                this.startAnimation('moveUp')
+            }
         }
 
     }

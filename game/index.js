@@ -15,7 +15,7 @@ mainScene = new Scene({
                            init () {
 
                             const startSound = this.parent.loader.getSound('start')
-
+                            startSound.muted = true
                             startSound.play()
 
                             Tank.texture = this.parent.loader.getImage('spriteSheet')
@@ -95,17 +95,14 @@ mainScene = new Scene({
 })
 
 
-const partyScene = new Party ({
-    
-})
-
    const game = new Game({
        el: document.body,
        width: 500,
        height: 500,
        background: 'gray',
        scenes: [
-        new Intro( )
+        new Intro({autoStart: false} ),
+        new Party({ autoStart: true})
        ]
    })
 

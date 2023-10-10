@@ -10,10 +10,19 @@ class Intro extends GameEngine.Scene {
     loading (loader) {
         loader.addImage('intro', 'static/intro.png')
         loader.addSound('intro', 'static/sound/stage_start.ogg')
+
     }
 
     init () {
+
+
         const {loader} = this.parent
+
+        Tank.texture = loader.getImage('spriteSheet')
+        Tank.atlas = loader.getJson('atlas')
+
+        Bullet.texture = loader.getImage('spriteSheet')
+        Bullet.atlas = loader.getJson('atlas')
 
        
         this.image = new Sprite(loader.getImage('intro'),{
@@ -39,14 +48,20 @@ class Intro extends GameEngine.Scene {
 
     update (timestamp) {
         const { keyboard } = this.parent 
+
+        if (keyboard.space && Util.delay('introSpace', 1500)) {
             if (keyboard.space && this.imageTweenStopper && this.image.y !== 0) {
                 this.imageTweenStopper()
                 delete this.imageTweenStopper
                 this.image.y = 0
                 }
 
-                else if (keyboard.space){
+                else {
                     this.parent.startScene('party')
+                    this.parent.finishScene(this)
                 }
+        }
+
+
         }
 }
