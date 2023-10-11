@@ -14,17 +14,30 @@ class Topology extends GameEngine.Container {
                 }
 
                 if (field === 'brick') {
-                    const body = new GameEngine.Body(Topology.texture, {
-                        debug: DEBUG_MODE,
-                        x: 0,
-                        y: 0,
-                        width: this.size / 4,
-                        height: this.size / 4
-                    } )
-                    body.setFramesCollection(Topology.atlas.frames)
-                    body.setFrameByKeys('brick', 'type1')
 
-                    this.add(body)
+                    for (let dx = 0; dx <= 1; dx++) {
+                        for (let dy = 0; dy <= 1; dy++) {
+                            const body = new GameEngine.Body(Topology.texture, {
+                                debug: DEBUG_MODE,
+                                static: true,
+                                anchorX: dx,
+                                anchorY: dy
+                            })
+
+                            body.setFramesCollection(Topology.atlas.frames)
+                            body.setFrameByKeys('wall', 'brick')
+        
+                            body.width = this.size / 2
+                            body.height = this.size / 2
+        
+                            body.x = x  * this.size + this.size / 2
+                            body.y = y  * this.size + this.size / 2
+        
+                            this.add(body)
+                        }
+                    }
+
+    
                 }
             }
         }
