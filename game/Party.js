@@ -12,17 +12,19 @@ class Party extends GameEngine.Scene {
         
         loader.addImage('spriteSheet', 'static/Battle City Sprites.png')
         loader.addJson('atlas', 'static/atlas.json')
+        loader.addJson('map', 'static/map1.json')
     }
     init() {
         const { loader } = this.parent
 
+       
+
+        Topology.texture = Bullet.texture = Tank.texture = loader.getImage('spriteSheet')
+        Topology.atlas = Bullet.atlas = Tank.atlas = loader.getJson('atlas')
+
         this.arcadePhysics = new GameEngine.ArcadePhysics
-
-        Tank.texture = loader.getImage('spriteSheet')
-        Tank.atlas = loader.getJson('atlas')
-
-        Bullet.texture = loader.getImage('spriteSheet')
-        Bullet.atlas = loader.getJson('atlas')
+        this.topology = new Topology(loader.getJson('map'))
+        this.add(this.topology)
 
         this.mainTank = new Tank()
         this.add(this.mainTank)

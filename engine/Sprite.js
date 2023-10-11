@@ -20,6 +20,8 @@
             this.animation = ''
             this.animationPaused = false 
 
+            this.atlas = args.atlas || null
+
             this.velocity = {
                 x: velocity.x || 0,
                 y: velocity.y || 0
