@@ -33,13 +33,16 @@ class DisplayObject extends GameEngine.EventEmitter {
         return Util.getScene(this)
     }
 
+    get game () {
+        return this.scene.parent
+    }
+    
     get absoluteX () { 
         return this.x - this.anchorX * this.width * this.scaleX
     }
 
     set absoluteX(value) { 
-        this.x = value + this.anchorX * this.width * this.scaleX
-       
+        this.x = value + this.anchorX * this.width * this.scaleX      
         return value
     }
 
@@ -49,12 +52,31 @@ class DisplayObject extends GameEngine.EventEmitter {
 
     set absoluteY (value) { 
         this.y = value + this.anchorY * this.height * this.scaleY
+        return value
+    }
+
+    get centerX () {
+        return this.absoluteX + this.width / 2 * this.scaleX 
+    }
+
+    set centerX (value) {
+        return this.absoluteX = value - this.width / 2
+    }
+
+    get centerY () {
+        return this.absoluteY + this.height / 2 * this.scaleY
+    }
+
+    set centerY (value) {
+        return this.absoluteY = value - this.height / 2
     }
 
     setScale (scale) {
         this.scaleX = scale
         this.scaleY = scale
     }
+
+    
 
     setParent(parent) {
         if(this.parent && this.parent.remove) {

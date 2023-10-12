@@ -26,9 +26,10 @@ class Bullet extends GameEngine.Body {
         Util.removeElements(this.tank.bullets, this)
         delete this.tank
 
-        const scene = Util.getScene(this)
-        scene.remove(this)
+        const scene = this.scene
         scene.arcadePhysics.remove(this)
+        scene.remove(this)
+
     }
 
 }

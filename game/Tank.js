@@ -3,8 +3,6 @@ class Tank extends GameEngine.Body {
 
         const args = Object.assign({
             scale: 3,
-            anchorX: 0.5,
-            anchorY: 0.5,
             keysDefault: [ 'gray', 'type1'],
             debug: DEBUG_MODE,
         }, originalArgs)
@@ -74,8 +72,8 @@ class Tank extends GameEngine.Body {
         if (keyboard.space && Util.delay('tank' + this.uid, Tank.BULLET_TIMEOUT)) {
             const bullet = new Bullet({
                 debug: DEBUG_MODE,
-                x: this.x,
-                y: this.y
+                x: this.centerX,
+                y: this.centerY
             })
 
             this.bullets.push(bullet)
