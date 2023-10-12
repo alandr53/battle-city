@@ -25,14 +25,16 @@ class Party extends GameEngine.Scene {
         this.arcadePhysics = new GameEngine.ArcadePhysics
         this.topology = new Topology(loader.getJson('map'))
         this.add(this.topology)
+        this.arcadePhysics.add(...this.topology.displayObjects)
 
         this.mainTank = new Tank()
         this.add(this.mainTank)
-        this.arcadePhysics.add(this.mainTank)
+        this.arcadePhysics.add(this.mainTank) 
     }
 
     update() {
         const { keyboard } = this.parent
         this.mainTank.movementUpdate(keyboard)
+        this.arcadePhysics.processing()
     }
 }

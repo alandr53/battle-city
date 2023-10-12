@@ -34,6 +34,14 @@ class Topology extends GameEngine.Container {
                             body.y = y  * this.size + this.size / 2
         
                             this.add(body)
+
+                            body.on('collision', a => {
+                                if (a instanceof Bullet) {
+                                    this.remove(body)
+                                    this.scene.arcadePhysics.remove(body)
+                                }
+                            })
+
                         }
                     }
 

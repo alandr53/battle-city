@@ -16,19 +16,19 @@ class Tank extends GameEngine.Body {
         this.setAnimationsCollection(Tank.atlas.actions)
         this.startAnimation('moveUp')
 
-        this.on('collision', (a, b) => {
-            if (b instanceof Bullet) {
-                if(this.bullets.includes(b)) {
+        this.on('collision', a => {
+            if (a instanceof Bullet) {
+                if(this.bullets.includes(a)) {
                     return
                 }
                 else {
                     this.visible = false
-                    Util.getScene(this).arcadePhysics.remove(this)
+                    this.scene.arcadePhysics.remove(this)
                 }
             }
-            a.velocity.x = 0
-            a.velocity.y = 0
-            console.log(a, b)
+            this.velocity.x = 0
+            this.velocity.y = 0
+            //console.log(a, b)
         })
     }
 
@@ -97,9 +97,9 @@ class Tank extends GameEngine.Body {
                 bullet.velocity.y = Bullet.NORMAL_SPEED
                 bullet.setFrameByKeys('bullet', 'down')
             }
-            const scene = Util.getScene(this)
-            scene.add(bullet)
-            scene.arcadePhysics.add(bullet)
+
+            this.scene.add(bullet)
+            this.scene.arcadePhysics.add(bullet)
         }
 
     }

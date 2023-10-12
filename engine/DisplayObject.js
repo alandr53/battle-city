@@ -29,6 +29,10 @@ class DisplayObject extends GameEngine.EventEmitter {
         }
     }
 
+    get scene () {
+        return Util.getScene(this)
+    }
+
     get absoluteX () { 
         return this.x - this.anchorX * this.width * this.scaleX
     }
