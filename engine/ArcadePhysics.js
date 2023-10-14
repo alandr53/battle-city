@@ -80,7 +80,7 @@ class ArcadePhysics {
                     }
                 }
                 if (crossing) {
-                     console.log(a, b)
+                    // console.log(a, b)
                     a.emit('collision', b, a)
                     b.emit('collision', a, b)
                 }

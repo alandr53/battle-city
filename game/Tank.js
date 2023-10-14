@@ -3,7 +3,7 @@ class Tank extends GameEngine.Body {
 
         const args = Object.assign({
             scale: 3,
-            keysDefault: [ 'gray', 'type1'],
+            keysDefault: [ 'yellow', 'type1'],
             debug: DEBUG_MODE,
         }, originalArgs)
         
@@ -14,20 +14,28 @@ class Tank extends GameEngine.Body {
         this.setAnimationsCollection(Tank.atlas.actions)
         this.startAnimation('moveUp')
 
-        this.on('collision', a => {
-            if (a instanceof Bullet) {
-                if(this.bullets.includes(a)) {
-                    return
-                }
-                else {
-                    this.scene.arcadePhysics.remove(this)             
-                    this.scene.remove(this)
-                }
-            }
-            this.velocity.x = 0
-            this.velocity.y = 0
+        this.on('collision', (a, b) => this.collisionHandler(a, b) )
+    }
+
+    collisionHandler (a, b) {
+        if (a instanceof Bullet) {
+
             //console.log(a, b)
-        })
+            
+            if (this.bullets.includes(a)) {               
+                return
+            }
+
+            else {
+                //console.log('remove')
+                this.scene.arcadePhysics.remove(this)
+                this.scene.remove(this)
+                
+            }
+        }
+
+        this.velocity.x = 0
+        this.velocity.y = 0
     }
 
     fire () {
@@ -56,9 +64,15 @@ class Tank extends GameEngine.Body {
             bullet.velocity.y = Bullet.NORMAL_SPEED
             bullet.setFrameByKeys('bullet', 'down')
         }
+       
+        if(this.scene !== null) {
+            this.scene.add(bullet)
+            this.scene.arcadePhysics.add(bullet)
+        }
 
-        this.scene.add(bullet)
-        this.scene.arcadePhysics.add(bullet)
+  
+   
+        return bullet
     }
 
     movementUpdate (keyboard) {

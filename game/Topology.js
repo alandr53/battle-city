@@ -65,10 +65,7 @@ class Topology extends GameEngine.Container {
                 }
 
                 if (field === 'brick') {
-
-
-
-    
+                    
                 }
             }
         }

@@ -76,8 +76,6 @@ class DisplayObject extends GameEngine.EventEmitter {
         this.scaleY = scale
     }
 
-    
-
     setParent(parent) {
         if(this.parent && this.parent.remove) {
             this.parent.remove(this)

@@ -4,7 +4,7 @@ class Party extends GameEngine.Scene {
             name: 'party',
             ...args
         })
-        this.enimies =  new Set
+        this.enemies =  new Set
     
     }
 
@@ -85,14 +85,22 @@ class Party extends GameEngine.Scene {
         const { keyboard } = this.parent
         this.mainTank.movementUpdate(keyboard)
 
-        for (const enemyTank of this.enimies) {
+        for (const enemyTank of this.enemies) {
+
+            if (!this.displayObjects.includes(enemyTank)) {
+                this.enemies.delete(enemyTank)
+                continue
+            }
+
+
             if (enemyTank.nextDirect) {
                 enemyTank.setDirect(enemyTank.nextDirect) 
                     enemyTank.nextDirect = null              
             }
 
             if(Util.delay(enemyTank.uid + 'fired', Tank.BULLET_TIMEOUT)) {
-                enemyTank.fire()
+                const bullet = enemyTank.fire()
+                bullet.isEnemy = true
             }
 
         }
@@ -100,41 +108,28 @@ class Party extends GameEngine.Scene {
         this.arcadePhysics.processing()
 
         if (
-            this.enimies.size < this.partyData.enemy.simultaneously
+            this.enemies.size < this.partyData.enemy.simultaneously
             && Util.delay(this.uid + 'enimyGeneration', this.partyData.enemy.spawnDelay)
         ) {
-            const [x, y] = this.topology.getCoordinats('enemy')
-            const enemyTank = new Tank ({
+            const [x, y] = Util.getRandomFrom(...this.topology.getCoordinats('enemy'))
+            const enemyTank = new EnemyTank ({
                 x: x * this.topology.size,
                 y: y * this.topology.size
             })
-            this.enimies.add(enemyTank)
+
+            enemyTank.isEnemy = true
+
+            this.enemies.add(enemyTank)
             this.add(enemyTank)
             this.arcadePhysics.add(enemyTank)
 
             enemyTank.setDirect('down')
 
-            enemyTank.on('collision', (a, b) => {
-
-                if (a instanceof Bullet) {
-                    if(enemyTank.bullets.includes(a)) {
-                        return
-                    }
-                    else {
-                        enemyTank.scene.arcadePhysics.remove(this)             
-                        enemyTank.scene.remove(this)
-                    }
-                }
-
-
-                if (b) {
-                    b.nextDirect = Util.getRandomFrom('up', 'left', 'right', 'down' )
-                }
-            })
+ 
 
         }
 
-        for (const enemyTank of this.enimies) {
+        for (const enemyTank of this.enemies) {
 
         }
 

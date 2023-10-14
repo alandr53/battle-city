@@ -2,7 +2,7 @@
     'use strict'
 
     class Sprite extends GameEngine.DisplayObject {
-        constructor(texture, args = {}){
+        constructor(texture, args = {}) {
             super(args)
 
 
