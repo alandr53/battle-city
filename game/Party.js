@@ -13,14 +13,15 @@ class Party extends GameEngine.Scene {
         loader.addImage('spriteSheet', 'static/Battle City Sprites.png')
         loader.addJson('atlas', 'static/atlas.json')
         loader.addJson('map', 'static/map1.json')
+        loader.addJson('party', 'static/party.json')
     }
     init() {
         const { loader,  renderer: { canvas: {width, height } } } = this.parent
 
-       
-
         Topology.texture = Bullet.texture = Tank.texture = loader.getImage('spriteSheet')
         Topology.atlas = Bullet.atlas = Tank.atlas = loader.getJson('atlas')
+
+        this.enimies = new Set
 
         this.arcadePhysics = new GameEngine.ArcadePhysics
 
@@ -50,13 +51,13 @@ class Party extends GameEngine.Scene {
             height: height + 20
         }))
 
-this.arcadePhysics.add(new Body(null, {
-    static: true,
-    x: -10,
-    y: width,
-    width: width + 20,
-    height: 10
-}))
+        this.arcadePhysics.add(new Body(null, {
+            static: true,
+            x: -10,
+            y: width,
+            width: width + 20,
+            height: 10
+        }))
 
         this.topology = new Topology(loader.getJson('map'))
         this.add(this.topology)
