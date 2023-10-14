@@ -20,8 +20,8 @@ class Tank extends GameEngine.Body {
                     return
                 }
                 else {
-                    this.visible = false
-                    this.scene.arcadePhysics.remove(this)
+                    this.scene.arcadePhysics.remove(this)             
+                    this.scene.remove(this)
                 }
             }
             this.velocity.x = 0
@@ -31,21 +31,21 @@ class Tank extends GameEngine.Body {
     }
 
     movementUpdate (keyboard) {
-        //const sd = x => this.setDirect(x, keyboard.space)
+        const sd = x => this.setDirect(x, keyboard.space)
         if (keyboard.arrowUp) {
-            this.setDirect('up', keyboard.space)
+            sd('up')
         }
         else if (keyboard.arrowLeft) { 
-            this.setDirect('left', keyboard.space)
+            sd('left')
         }
         else if (keyboard.arrowRight) { 
-            this.setDirect('right', keyboard.space)
+            sd('right')
         }
         else if (keyboard.arrowDown) { 
-            this.setDirect('down', keyboard.space)
+            sd('down')
         }
         else {
-            this.setDirect(null, keyboard.space)
+            sd(null)
         }
     }
 
