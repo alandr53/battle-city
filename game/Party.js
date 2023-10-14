@@ -83,8 +83,20 @@ class Party extends GameEngine.Scene {
 
     update() {
         const { keyboard } = this.parent
-        const enemyTankForRedirect = []
         this.mainTank.movementUpdate(keyboard)
+
+        for (const enemyTank of this.enimies) {
+            if (enemyTank.nextDirect) {
+                enemyTank.setDirect(enemyTank.nextDirect) 
+                    enemyTank.nextDirect = null              
+            }
+
+            if(Util.delay(enemyTank.uid + 'fired', Tank.BULLET_TIMEOUT)) {
+                enemyTank.fire()
+            }
+
+        }
+
         this.arcadePhysics.processing()
 
         if (
@@ -102,6 +114,24 @@ class Party extends GameEngine.Scene {
 
             enemyTank.setDirect('down')
 
+            enemyTank.on('collision', (a, b) => {
+
+                if (a instanceof Bullet) {
+                    if(enemyTank.bullets.includes(a)) {
+                        return
+                    }
+                    else {
+                        enemyTank.scene.arcadePhysics.remove(this)             
+                        enemyTank.scene.remove(this)
+                    }
+                }
+
+
+                if (b) {
+                    b.nextDirect = Util.getRandomFrom('up', 'left', 'right', 'down' )
+                }
+            })
+
         }
 
         for (const enemyTank of this.enimies) {
@@ -113,22 +143,6 @@ class Party extends GameEngine.Scene {
                 object.destroy()
             }
         }
-        
-/*        for (const enemyTank of enemyTankForRedirect) {
-            enemyTank.direct = Util.getRandomFrom('up', 'left', 'right', 'down')
-        }
-
-       */
-
-
-
-        /*
-            enemyTank.on('collision', (a, b) => {
-                if (a.isBrick) {
-                    enemyTankForRedirect.add(b)
-                }
-            })
-        */
     }
     
 }

@@ -30,6 +30,37 @@ class Tank extends GameEngine.Body {
         })
     }
 
+    fire () {
+        const bullet = new Bullet({
+            debug: DEBUG_MODE,
+            x: this.centerX,
+            y: this.centerY
+        })
+
+        this.bullets.push(bullet)
+        bullet.tank = this
+
+        if (this.animation === 'moveUp') {
+            bullet.velocity.y = -Bullet.NORMAL_SPEED
+            bullet.setFrameByKeys('bullet', 'up')
+        }
+        else if (this.animation === 'moveLeft') {
+            bullet.velocity.x = -Bullet.NORMAL_SPEED
+            bullet.setFrameByKeys('bullet', 'left')
+        }
+        else if (this.animation === 'moveRight') {
+            bullet.velocity.x = Bullet.NORMAL_SPEED
+            bullet.setFrameByKeys('bullet', 'right')
+        }
+        else if (this.animation === 'moveDown') {
+            bullet.velocity.y = Bullet.NORMAL_SPEED
+            bullet.setFrameByKeys('bullet', 'down')
+        }
+
+        this.scene.add(bullet)
+        this.scene.arcadePhysics.add(bullet)
+    }
+
     movementUpdate (keyboard) {
         const sd = x => this.setDirect(x, keyboard.space)
         if (keyboard.arrowUp) {
@@ -88,34 +119,7 @@ class Tank extends GameEngine.Body {
         }
 
         if (fireCommand && Util.delay('tank' + this.uid, Tank.BULLET_TIMEOUT)) {
-            const bullet = new Bullet({
-                debug: DEBUG_MODE,
-                x: this.centerX,
-                y: this.centerY
-            })
-
-            this.bullets.push(bullet)
-            bullet.tank = this
- 
-            if (this.animation === 'moveUp') {
-                bullet.velocity.y = -Bullet.NORMAL_SPEED
-                bullet.setFrameByKeys('bullet', 'up')
-            }
-            else if (this.animation === 'moveLeft') {
-                bullet.velocity.x = -Bullet.NORMAL_SPEED
-                bullet.setFrameByKeys('bullet', 'left')
-            }
-            else if (this.animation === 'moveRight') {
-                bullet.velocity.x = Bullet.NORMAL_SPEED
-                bullet.setFrameByKeys('bullet', 'right')
-            }
-            else if (this.animation === 'moveDown') {
-                bullet.velocity.y = Bullet.NORMAL_SPEED
-                bullet.setFrameByKeys('bullet', 'down')
-            }
-
-            this.scene.add(bullet)
-            this.scene.arcadePhysics.add(bullet)
+            this.fire()
         }
 
     }
@@ -125,5 +129,5 @@ Tank.texture = null
 Tank.atlas = null
 
 Tank.NORMAL_SPEED = 2
-Tank.BULLET_TIMEOUT = 250
+Tank.BULLET_TIMEOUT = 1000
 //
