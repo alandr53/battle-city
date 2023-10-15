@@ -6,12 +6,14 @@
         constructor () {
             this.loadOrder = {
                 images: [],
-                jsons: []
+                jsons: [],
+                sounds: []
             }
 
             this.resources = {
-                images: [],
-                jsons: []
+                images: {},
+                jsons: {},
+                sounds: {}
             }
         }
 
@@ -23,12 +25,20 @@
             this.loadOrder.jsons.push({name, address})
         }
 
+        addSound(name, src) {
+            this.loadOrder.sounds.push({name, src})
+        }
+
         getImage (name) { 
            return this.resources.images[name] 
         } 
 
         getJson (name) { 
             return this.resources.jsons[name]
+        }
+
+        getSound (name) { 
+            return this.resources.sounds[name]
         }
 
         load(callback) { 
@@ -41,7 +51,7 @@
                     this.resources.images[name] = image 
 
                     if(this.loadOrder.images.includes(imageData) ) {
-                        const index = this.loadOrder.images.indexOf(name)
+                        const index = this.loadOrder.images.indexOf(imageData)
                         this.loadOrder.images.splice(index, 1)
                     }
                 })
@@ -57,13 +67,30 @@
                     this.resources.jsons[name] = json 
 
                     if(this.loadOrder.jsons.includes(jsonData) ) {
-                        const index = this.loadOrder.jsons.indexOf(name)
+                        const index = this.loadOrder.jsons.indexOf(jsonData)
                         this.loadOrder.jsons.splice(index, 1)
                     }
                 })
                 promises.push(promise) 
             }
 
+            for (const soundData of this.loadOrder.sounds) {
+                const { name, src } = soundData
+                //soundData.muted = true
+                const promise = Loader
+                    .loadSound(src)
+                    .then(audio => {
+                    this.resources.sounds[name] = audio 
+
+                    if(this.loadOrder.sounds.includes(soundData) ) {
+                        const index = this.loadOrder.sounds.indexOf(soundData)
+                        this.loadOrder.sounds.splice(index, 1)
+                    }
+                })
+                promises.push(promise) 
+            }
+
+           // promises.push(new Promise(resolve => setTimeout(resolve, 2000))) //delay after restart 2 seconds
             Promise.all(promises).then(callback)
         }
 
@@ -85,6 +112,20 @@
                     .then(result => result.json())
                     .then(result => resolve(result))
                     .catch(err =>reject(err))
+            })
+        }
+
+        static loadSound (src) {
+            return new Promise ( (resolve, reject) => {
+                try {
+                    const audio = new Audio
+                    audio.addEventListener('canplaythrough', () => resolve(audio))
+                    audio.src = src
+                } 
+                catch (error) {
+                    reject(error)
+                }
+
             })
         }
     }

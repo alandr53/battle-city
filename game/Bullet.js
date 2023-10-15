@@ -2,6 +2,7 @@ class Bullet extends GameEngine.Body {
     constructor (originalArgs = {}) {
 
         const args = Object.assign({
+            scale: 2,
             anchorX: 0.5,
             anchorY: 0.5,
         }, originalArgs)
@@ -15,9 +16,14 @@ class Bullet extends GameEngine.Body {
         this.setAnimationsCollection(Bullet.atlas.actions)
 
         this.on('collision', (a, b) => {
-            if (b === this.tank) {
+            
+            if (a === this.tank) { //collision with itself bullet no destroy
                 return
             }
+            if (a.isEnimy && b.isEnimy) { //collision between enemys bullet no destroy
+                return
+            }
+            
             this.toDestroy = true
         })
     }
@@ -25,10 +31,10 @@ class Bullet extends GameEngine.Body {
     destroy () {
         Util.removeElements(this.tank.bullets, this)
         delete this.tank
-
-        const scene = Util.getScene(this)
-        scene.remove(this)
+        const scene = this.scene
         scene.arcadePhysics.remove(this)
+        scene.remove(this)
+
     }
 
 }
