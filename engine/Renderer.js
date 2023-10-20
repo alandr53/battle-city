@@ -33,11 +33,8 @@ class Renderer {
 
     tick (timestamp) {
         this.update(timestamp)
-
         this.clear() 
-
         this.render()
-
         requestAnimationFrame(timestamp => this.tick(timestamp)) 
     }
 

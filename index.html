@@ -66,12 +66,12 @@
 
         document.body.append(renderer.canvas)
 
-        loader.addImage('cola', 'static/cola.jpeg')
+        loader.addImage('pepsi', 'static/pepsi.jpeg')
         loader.addJson('persons', 'static/persons.json')
       
         loader.load(() => {
             //const sprite = new Sprite(loader.getImage('hase'))
-            sprite1 = new Sprite(loader.getImage('cola'), {
+            sprite1 = new Sprite(loader.getImage('pepsi'), {
                 x: 100,
                 y: 200,
                 //rotation: Math.PI / 2,
@@ -80,7 +80,7 @@
                 anchorY: 0.5
             })
 
-            sprite2 = new Sprite(loader.getImage('cola'), {
+            sprite2 = new Sprite(loader.getImage('pepsi'), {
                 x: 200,
                 y: 200,
                 //rotation: Math.PI / 2,
