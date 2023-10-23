@@ -6,7 +6,7 @@ mainScene = new Scene({
                            autoStart: true,
                            name: 'mainScene',
 
- /*                           loading(loader) {
+                           loading(loader) {
                                loader.addImage('spriteSheet', 'static/Battle City Sprites.png')
                                loader.addJson('atlas', 'static/atlas.json')
                                
@@ -53,13 +53,8 @@ mainScene = new Scene({
                             }
                             this.arcadePhysics.processing()
                            }
-*/
-loading(loader) {
-    loader.addImage('man', 'static/man.png')
-    loader.addJson('manAtlas', 'static/manAtlas.json')
-    
-},
-                          init() {
+
+           /*                init() {
                                Man.texture = this.parent.loader.getImage('man')
                                Man.atlas = this.parent.loader.getJson('manAtlas')
 
@@ -119,7 +114,7 @@ loading(loader) {
                                 this.man1.startAnimation('stayDown')
                                }
                                this.arcadePhysics.processing()
-                           }
+                           }*/
 })
 
    const game = new Game({
