@@ -6,7 +6,7 @@ mainScene = new Scene({
                            autoStart: true,
                            name: 'mainScene',
 
-                           loading(loader) {
+ /*                           loading(loader) {
                                loader.addImage('spriteSheet', 'static/Battle City Sprites.png')
                                loader.addJson('atlas', 'static/atlas.json')
                                
@@ -20,73 +20,46 @@ mainScene = new Scene({
 
                             this.arcadePhysics = new ArcadePhysics
                             
-                            this.tank1 = new Tank({
+                            this.tank = new Tank({
                                 debug: DEBUG_MODE,
-                                x: this.parent.renderer.canvas.width / 2,
-                                y: this.parent.renderer.canvas.height / 2 + 100,
-                            })
-
-                            this.tank2 = new Tank({
-                                debug: DEBUG_MODE,
-                                x: this.parent.renderer.canvas.width / 2,
+                                x: this.parent.renderer.canvas.width / 2 - 100,
                                 y: this.parent.renderer.canvas.height / 2,
                             })
 
-
-                            this.add(this.tank1, this.tank2)
-                            this.arcadePhysics.add(this.tank1, this.tank2)
-
-                            this.arcadePhysics.add(new Body(null, {
-                                static: true,
-                                x: -10,
-                                y: -10,
-                                width: this.parent.renderer.canvas.width + 20,
-                                height: 10
-                            }))
-
-                            this.arcadePhysics.add(new Body(null, {
-                                static: true,
-                                x: -10,
-                                y: -10,
-                                width: 10,
-                                height: this.parent.renderer.canvas.height + 20
-                            }))
+                            this.add(this.tank)
+                            this.arcadePhysics.add(this.tank)
                            },
 
                            update () {
                             const { keyboard } = this.parent
                             
-                            this.tank1.movementUpdate(keyboard)
+                            this.tank.movementUpdate(keyboard)
 
-                            if (keyboard.space && Util.delay('tank' + this.tank1.uid, Tank.BULLET_TIMEOUT)) {
+                            if (keyboard.space && Util.delay('tank' + this.tank.uid, Tank.BULLET_TIMEOUT)) {
                                 const bullet = new Bullet({
                                     debug: DEBUG_MODE,
-                                    x: this.tank1.x,
-                                    y: this.tank1.y
+                                    x: this.tank.x,
+                                    y: this.tank.y
                                 })
                     
-                                this.tank1.bullets.push(bullet)
-                                bullet.tank = this.tank1
+                                this.tank.bullets.push(bullet)
+                                bullet.tank = this.tank
                     
-                                if (this.tank1.animation === 'moveUp') {
+                                if (this.tank.animation === 'moveUp') {
                                     bullet.velocity.y -= Bullet.NORMAL_SPEED
                                     bullet.setFrameByKeys('bullet', 'up')
                                 }
                                 this.add(bullet)
-                                this.arcadePhysics.add(bullet)
                             }
                             this.arcadePhysics.processing()
-
-                            for (const tank of [this.tank1, this.tank2]) {
-                                for (const bullet of tank.bullets) {
-                                    if (bullet.toDestroy) {
-                                        bullet.destroy()
-                                    }
-                                }
-                            }
                            }
-
-           /*                init() {
+*/
+loading(loader) {
+    loader.addImage('man', 'static/man.png')
+    loader.addJson('manAtlas', 'static/manAtlas.json')
+    
+},
+                          init() {
                                Man.texture = this.parent.loader.getImage('man')
                                Man.atlas = this.parent.loader.getJson('manAtlas')
 
@@ -146,7 +119,7 @@ mainScene = new Scene({
                                 this.man1.startAnimation('stayDown')
                                }
                                this.arcadePhysics.processing()
-                           }*/
+                           }
 })
 
    const game = new Game({
