@@ -14,12 +14,8 @@ class Intro extends GameEngine.Scene {
     }
 
     init () {
-
-
         const {loader} = this.parent
 
-
-       
         this.image = new Sprite(loader.getImage('intro'),{
             x: 0,
             y: this.parent.renderer.canvas.height,

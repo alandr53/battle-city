@@ -19,15 +19,13 @@ class Tank extends GameEngine.Body {
 
     collisionHandler (a, b) {
         if (a instanceof Bullet) {
-
-            //console.log(a, b)
             
             if (this.bullets.includes(a)) {               
                 return
             }
 
             else {
-                //console.log('remove')
+
                 this.scene.arcadePhysics.remove(this)
                 this.scene.remove(this)
                 

@@ -9,8 +9,8 @@ const {Body, Game, Scene, ArcadePhysics, Util, Sprite} = GameEngine
        height: 650,
        background: 'black',
        scenes: [
-        new Intro({autoStart: false} ),
-        new Party({ autoStart: true})
+        new Intro({autoStart: true} ),
+        new Party({ autoStart: false})
        ]
    })
 

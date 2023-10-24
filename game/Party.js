@@ -41,8 +41,6 @@ class Party extends GameEngine.Scene {
             width: 9,
             height: height + 20
         }))
-// --- // 
-
         this.arcadePhysics.add(new Body(null, {
             static: true,
             x: height,
