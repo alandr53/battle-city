@@ -27,8 +27,7 @@ class Tank extends GameEngine.Body {
             else {
 
                 this.scene.arcadePhysics.remove(this)
-                this.scene.remove(this)
-                
+                this.scene.remove(this)               
             }
         }
 

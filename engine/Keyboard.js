@@ -10,6 +10,7 @@
             this.arrowRight = false
             this.arrowLeft = false
             this.space = false
+            this.enter = false
             
 
             document.body.addEventListener('keydown', function (event) {
@@ -33,6 +34,10 @@
                     case "Space":
                         keyboard.space = true
                         break
+
+                    case "Enter": 
+                        keyboard.enter = !keyboard.enter
+                        break
                 }
             })
 
@@ -54,9 +59,9 @@
                         keyboard.arrowLeft = false
                         break
 
-                        case "Space":
-                            keyboard.space = false
-                            break
+                    case "Space":
+                        keyboard.space = false
+                        break
                 }
             })
 

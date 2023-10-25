@@ -147,6 +147,3 @@
     window.GameEngine = window.GameEngine || {}
     window.GameEngine.Sprite = Sprite
 })();
-
-
-// 9:20 

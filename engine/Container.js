@@ -36,7 +36,6 @@ class Container extends GameEngine.DisplayObject {
         }
     }
     
-    
     draw (canvas, context) {
         super.draw(() => {
             context.save()

@@ -8,8 +8,8 @@ class Intro extends GameEngine.Scene {
     }
 
     loading (loader) {
-        loader.addImage('intro', 'static/intro.png')
-        loader.addSound('intro', 'static/sound/stage_start.ogg')
+        loader.addImage('intro', 'static/intro1.png')
+        loader.addSound('intro_sound', 'static/sound/stage_start.ogg')
 
     }
 
@@ -29,7 +29,7 @@ class Intro extends GameEngine.Scene {
             duration: 3500,
             processer (target, percent, context) {
                 if(percent === 0) {
-                    loader.getSound('intro').play()
+                 //   loader.getSound('intro_sound').play()
                     context.y = target.y
                 }
                 target.y = context.y * (1 - percent) 
@@ -44,10 +44,8 @@ class Intro extends GameEngine.Scene {
             if (keyboard.space && this.imageTweenStopper && this.image.y !== 0) {
                 this.imageTweenStopper()
                 delete this.imageTweenStopper
-                this.image.y = 0
-                }
-
-                else {
+                this.image.y = 0             
+                } else {
                     this.parent.startScene('party')
                     this.parent.finishScene(this)
                 }

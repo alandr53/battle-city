@@ -30,8 +30,7 @@
                 }      
 
                 for(const scene of autoStartedScenes) {
-                    scene.status = 'started'
-                 
+                    scene.status = 'started'               
                 }      
             })
 
@@ -52,23 +51,24 @@
 
         tick (timestamp) {
           const startedScenes = this.scenes.filter(x => x.status === 'started')
-
-       for (const scene of startedScenes) {
-                scene.update(timestamp)
+          const startedWaiting = this.scenes.filter(x => x.status === 'waiting')
+console.log('tick')
+            for (const scene of startedScenes) {
+                    scene.update(timestamp)
+                    scene.tick(timestamp) // call Container tick metode
+                   
             }
-
-        for (const scene of startedScenes) {
+   /*         for (const scene of startedScenes) {
                 scene.tick(timestamp)
-            }
+                }*/
+                this.renderer.clear()
 
-            this.renderer.clear()
-
-        for (const scene of startedScenes) {
-                scene.draw(this.renderer.canvas, this.renderer.context)
-            }
-          
+            for (const scene of startedScenes) {
+                    scene.draw(this.renderer.canvas, this.renderer.context)
+            }   
+            
             requestAnimationFrame(timestamp => this.tick(timestamp)) 
-        }
+            }
 
         getScene (name) {
             if (name instanceof GameEngine.Scene) {
@@ -114,9 +114,7 @@
             }
             scene.status = 'finisched'
             this.scenesCollection.remove(scene)
-            scene.beforeDestroy()
-           
-            
+            scene.beforeDestroy()          
         }
                
             }

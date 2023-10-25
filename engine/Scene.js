@@ -9,8 +9,8 @@
             this.name = args.name || ''
             this.status = 'waiting'
             this.stage = this.displayObjects
-
-           
+            this.stop = false
+   
             if (args.loading) {
                 this.loading = args.loading.bind(this)
             }
@@ -26,12 +26,10 @@
             if (args.beforeDestroy) {
                 this.beforeDestroy = args.beforeDestroy.bind(this)  
             }
-
         }
         loading () {}
         init() {}
         update() {}
-
         beforeDestroy () { }
     }
 
