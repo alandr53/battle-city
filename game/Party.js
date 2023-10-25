@@ -5,6 +5,7 @@ class Party extends GameEngine.Scene {
             ...args
         })
         this.enemies =  new Set
+    
     }
 
     loading (loader) {
@@ -19,11 +20,12 @@ class Party extends GameEngine.Scene {
 
         Topology.texture = Bullet.texture = Tank.texture = loader.getImage('spriteSheet')
         Topology.atlas = Bullet.atlas = Tank.atlas = loader.getJson('atlas')
+
         this.partyData = loader.getJson('party') 
 
         this.arcadePhysics = new GameEngine.ArcadePhysics
 
-//add borders
+
         this.arcadePhysics.add(new Body(null, {
             static: true,
             x: -10,
@@ -54,12 +56,12 @@ class Party extends GameEngine.Scene {
             width: width + 20,
             height: 9
         }))
-// add map
-        this.topology = new Topology(loader.getJson('map')) 
+
+        this.topology = new Topology(loader.getJson('map'))
         this.add(this.topology)
         this.arcadePhysics.add(...this.topology.displayObjects)
-// add map
-        const [x, y] = this.topology.getCoordinats('tank1', true)  
+
+        const [x, y] = this.topology.getCoordinats('tank1', true)
         this.mainTank = new Tank({
             x: x * this.topology.size,
             y: y * this.topology.size
@@ -77,17 +79,28 @@ class Party extends GameEngine.Scene {
         }
     }
 
+    pause() {
+        const { keyboard } = this.parent
+        if(keyboard.enter === false) {
+            this.scene.status = 'started'
+        }
+    }
+
     update() {
         const { keyboard } = this.parent
-        console.log(this.status)
- 
+        if(keyboard.enter === true) {
+            this.scene.status = 'paused'
+        }
+
         this.mainTank.movementUpdate(keyboard)
-        
-        
+
         for (const enemyTank of this.enemies) {
+
             if (!this.displayObjects.includes(enemyTank)) {
                 this.enemies.delete(enemyTank)
-                continue }
+                continue
+            }
+
 
             if (enemyTank.nextDirect) {
                 enemyTank.setDirect(enemyTank.nextDirect) 
@@ -98,12 +111,15 @@ class Party extends GameEngine.Scene {
                 const bullet = enemyTank.fire()
                 bullet.isEnemy = true
             }
+
         }
-      
+
         this.arcadePhysics.processing()
-        
-        if ( this.enemies.size < this.partyData.enemy.simultaneously
-            && Util.delay(this.uid + 'enimyGeneration', this.partyData.enemy.spawnDelay) ) {
+
+        if (
+            this.enemies.size < this.partyData.enemy.simultaneously
+            && Util.delay(this.uid + 'enimyGeneration', this.partyData.enemy.spawnDelay)
+        ) {
             const [x, y] = Util.getRandomFrom(...this.topology.getCoordinats('enemy'))
             const enemyTank = new EnemyTank ({
                 x: x * this.topology.size,
@@ -117,6 +133,7 @@ class Party extends GameEngine.Scene {
             this.arcadePhysics.add(enemyTank)
 
             enemyTank.setDirect('down')
+
         }
 
         for (const enemyTank of this.enemies) {

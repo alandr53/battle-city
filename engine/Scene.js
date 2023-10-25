@@ -23,12 +23,17 @@
                 this.update = args.update.bind(this)  
             }
 
+            if (args.pause) {
+                this.pause = args.pause.bind(this)  
+            }
+
             if (args.beforeDestroy) {
                 this.beforeDestroy = args.beforeDestroy.bind(this)  
             }
         }
         loading () {}
         init() {}
+        pause() {}
         update() {}
         beforeDestroy () { }
     }
