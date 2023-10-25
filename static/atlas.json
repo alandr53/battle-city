@@ -30,7 +30,27 @@
                 ["tank", "right", "frame1"],
                 ["tank", "right", "frame2"]
             ]
+        },
+
+        "appearTank": {
+            "duration": 300,
+            "keys": [
+                ["appear", "frame1"],
+                ["appear", "frame2"],
+                ["appear", "frame3"],
+                ["appear", "frame4"],
+                ["appear", "frame5"]
+            ]
+        },
+
+        "appearShield": {
+            "duration": 300,
+            "keys": [
+                ["shield", "frame1"],
+                ["shield", "frame2"]
+            ]
         }
+  
     },
 
     "frames": [
@@ -245,31 +265,129 @@
             "height": 3
         },
         {
-            "keys": ["appear", "one"],
+            "keys": ["appear", "frame1"],
             "x": 259,
             "y": 99,
             "width": 9,
             "height": 9
         },
         {
-            "keys": ["appear", "two"],
+            "keys": ["appear", "frame2"],
             "x": 274,
             "y": 98,
             "width": 11,
             "height": 11
         },
         {
-            "keys": ["appear", "three"],
+            "keys": ["appear", "frame3"],
             "x": 289,
             "y": 97,
             "width": 13,
             "height": 13
         },
         {
-            "keys": ["appear", "four"],
+            "keys": ["appear", "frame4"],
             "x": 304,
             "y": 96,
             "width": 15,
+            "height": 15
+        },
+        {
+            "keys": ["big_exposion", "frame1"],
+            "x": 259,
+            "y": 130,
+            "width": 11,
+            "height": 11
+        },
+        {
+            "keys": ["big_exposion", "frame2"],
+            "x": 272,
+            "y": 129,
+            "width": 14,
+            "height": 14
+        },
+        {
+            "keys": ["big_exposion", "frame3"],
+            "x": 288,
+            "y": 128,
+            "width": 16,
+            "height": 16
+        },
+        {
+            "keys": ["big_exposion", "frame4"],
+            "x": 205,
+            "y": 129,
+            "width": 29,
+            "height": 29
+        },
+        {
+            "keys": ["big_exposion", "frame5"],
+            "x": 236,
+            "y": 128,
+            "width": 32,
+            "height": 32
+        },
+        {
+            "keys": ["shield", "frame1"],
+            "x": 256,
+            "y": 144,
+            "width": 16,
+            "height": 16
+        },
+        {
+            "keys": ["shield", "frame2"],
+            "x": 272,
+            "y": 144,
+            "width": 16,
+            "height": 16
+        },
+        {
+            "keys": ["point100", "frame1"],
+            "x": 289,
+            "y": 164,
+            "width": 14,
+            "height": 7
+        },
+        {
+            "keys": ["point200", "frame1"],
+            "x": 305,
+            "y": 164,
+            "width": 14,
+            "height": 7
+        },
+        {
+            "keys": ["point300", "frame1"],
+            "x": 321,
+            "y": 164,
+            "width": 14,
+            "height": 7
+        },
+        {
+            "keys": ["point400", "frame1"],
+            "x": 337,
+            "y": 164,
+            "width": 14,
+            "height": 7
+        },
+        {
+            "keys": ["point500", "frame1"],
+            "x": 353,
+            "y": 164,
+            "width": 14,
+            "height": 7
+        },
+        {
+            "keys": ["pause", "frame1"],
+            "x": 289,
+            "y": 176,
+            "width": 39,
+            "height": 7
+        },
+        {
+            "keys": ["game_over", "frame1"],
+            "x": 289,
+            "y": 184,
+            "width": 31,
             "height": 15
         }
     ]
