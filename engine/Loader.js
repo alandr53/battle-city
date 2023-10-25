@@ -76,7 +76,7 @@
 
             for (const soundData of this.loadOrder.sounds) {
                 const { name, src } = soundData
-                //soundData.muted = true
+                soundData.muted = false
                 const promise = Loader
                     .loadSound(src)
                     .then(audio => {

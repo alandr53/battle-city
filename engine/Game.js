@@ -30,8 +30,7 @@
                 }      
 
                 for(const scene of autoStartedScenes) {
-                    scene.status = 'started'
-                 
+                    scene.status = 'started'               
                 }      
             })
 

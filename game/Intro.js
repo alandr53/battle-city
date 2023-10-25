@@ -29,7 +29,7 @@ class Intro extends GameEngine.Scene {
             duration: 3500,
             processer (target, percent, context) {
                 if(percent === 0) {
-                 //   loader.getSound('intro_sound').play()
+                    loader.getSound('intro_sound').play()
                     context.y = target.y
                 }
                 target.y = context.y * (1 - percent) 

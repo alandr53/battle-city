@@ -10,7 +10,8 @@ const {Body, Game, Scene, ArcadePhysics, Util, Sprite} = GameEngine
        background: 'black',
        scenes: [
         new Intro({autoStart: true} ),
-        new Party({ autoStart: false})
+        new Party({ autoStart: false}),
+        new GameOver({ autoStart: false})
        ]
    })
 

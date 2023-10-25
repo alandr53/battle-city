@@ -16,7 +16,6 @@ class EnemyTank extends Tank {
                 }
 
                 else {
-                    console.log(b)
                     this.scene.arcadePhysics.remove(this)
                     this.scene.remove(this)
                 }
