@@ -69,6 +69,10 @@ class Party extends GameEngine.Scene {
         this.add(this.mainTank)
         this.arcadePhysics.add(this.mainTank) 
 
+        const [m, k] = this.topology.getCoordinats('tank1', true)
+
+
+
         if(this.topology.eagle) {
             this.topology.eagle.on('collision', a => {
                 if (a instanceof Bullet) {
