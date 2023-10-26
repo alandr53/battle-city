@@ -42,8 +42,6 @@
             }
         }
 
-
-
         setFramesCollection (framesCollection) { 
             this.frames = framesCollection
         }
