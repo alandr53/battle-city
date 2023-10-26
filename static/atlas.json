@@ -30,6 +30,13 @@
                 ["tank", "right", "frame1"],
                 ["tank", "right", "frame2"]
             ]
+        },
+
+        "gameOver": {
+            "duration": 300,
+            "keys": [
+                ["game_over", "frame1"]
+            ]
         }
     },
 

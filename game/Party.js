@@ -4,8 +4,8 @@ class Party extends GameEngine.Scene {
             name: 'party',
             ...args
         })
-        this.enemies =  new Set
-    
+        this.enemies =  new Set  
+        this.gameOver = null 
     }
 
     loading (loader) {
@@ -18,8 +18,8 @@ class Party extends GameEngine.Scene {
     init() {
         const { loader,  renderer: { canvas: {width, height } } } = this.parent
 
-        Topology.texture = Bullet.texture = Tank.texture = loader.getImage('spriteSheet')
-        Topology.atlas = Bullet.atlas = Tank.atlas = loader.getJson('atlas')
+        Topology.texture = Bullet.texture = Tank.texture = GameOver.texture = loader.getImage('spriteSheet')
+        Topology.atlas = Bullet.atlas = Tank.atlas = GameOver.atlas = loader.getJson('atlas')
 
         this.partyData = loader.getJson('party') 
 
@@ -56,11 +56,11 @@ class Party extends GameEngine.Scene {
             width: width + 20,
             height: 9
         }))
-
+// add topoligy
         this.topology = new Topology(loader.getJson('map'))
         this.add(this.topology)
         this.arcadePhysics.add(...this.topology.displayObjects)
-
+// add tank friend
         const [x, y] = this.topology.getCoordinats('tank1', true)
         this.mainTank = new Tank({
             x: x * this.topology.size,
@@ -69,13 +69,17 @@ class Party extends GameEngine.Scene {
         this.add(this.mainTank)
         this.arcadePhysics.add(this.mainTank) 
 
-        const [m, k] = this.topology.getCoordinats('tank1', true)
-
-
+        this.gameOver = new GameOver({
+            x: this.parent.renderer.canvas.width / 2,
+            y: this.parent.renderer.canvas.height / 2
+        })
+        
 
         if(this.topology.eagle) {
             this.topology.eagle.on('collision', a => {
                 if (a instanceof Bullet) {
+
+                    this.add(this.gameOver)
                     this.game.startScene('resultScene')
                     this.game.finishScene(this)
                 }
@@ -115,7 +119,6 @@ class Party extends GameEngine.Scene {
                 const bullet = enemyTank.fire()
                 bullet.isEnemy = true
             }
-
         }
 
         this.arcadePhysics.processing()
