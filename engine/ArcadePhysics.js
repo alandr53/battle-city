@@ -53,11 +53,8 @@ class ArcadePhysics {
                             width: bodyB.width,
                             height: bodyB.height
                         }
-                    )
-                    
-                    if (crossing) {
-                        break
-                    }
+                    )                 
+                    if (crossing) { break  }
                 }
                 if (crossing === false) {
                     for (const topB of topsB) {

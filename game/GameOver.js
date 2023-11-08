@@ -5,7 +5,7 @@ class GameOver extends GameEngine.Body {
             scale: 5,
             anchorX: 0.5,
             anchorY: 0.5,
-            debug: false,
+            debug: DEBUG_MODE,
             body: {
                  x: 0,
                  y: 0.5,

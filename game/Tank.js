@@ -23,14 +23,11 @@ class Tank extends GameEngine.Body {
             if (this.bullets.includes(a)) {               
                 return
             }
-
             else {
-
                 this.scene.arcadePhysics.remove(this)
                 this.scene.remove(this)               
             }
         }
-
         this.velocity.x = 0
         this.velocity.y = 0
     }

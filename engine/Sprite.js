@@ -73,11 +73,10 @@
 
         setFrameByKeys (...keys) {
             const frame = this.getFrameByKeys(...keys, ...this.keysDefault)
-
+            
             if(!frame) {
                 return false
-            }
-         
+            }     
             this.frame.x = frame.x
             this.frame.y = frame.y
             this.frame.width = frame.width
@@ -106,7 +105,10 @@
         }
 
         tick (timestamp) {
-            if (!this.animationPaused && this.animation && GameEngine.Util.delay(this.animation + this.uid, this.frameDelay)) {
+            if (!this.animationPaused && this.animation && 
+                    GameEngine.Util.delay(this.animation + 
+                    this.uid, this.frameDelay)
+                ) {
                 const {keys} = this.animations[this.animation]
 
                 this.frameNumber = (this.frameNumber + 1) % keys.length

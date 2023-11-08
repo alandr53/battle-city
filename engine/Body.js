@@ -67,8 +67,6 @@
                 this.height * this.scaleY
             )
   
-         
-
                 if (this.debug) {
                     const { x, y, width, height } = this.bodyRect
                     context.fillStyle = 'rgba(255, 0, 0, 0.2)'
@@ -80,14 +78,9 @@
                     context.beginPath()
                     context.arc( 0,0,4,0,Math.PI*2)
                     context.fill()
-
                 }
-
             context.restore()
-
-        }
-          
-        
+        }     
     }
     window.GameEngine = window.GameEngine || {}
     window.GameEngine.Body = Body

@@ -92,10 +92,7 @@ class DisplayObject extends GameEngine.EventEmitter {
             callback() 
         }
      }
-
 }
-
-
     window.GameEngine = window.GameEngine || {}
     window.GameEngine.DisplayObject = DisplayObject
 })();

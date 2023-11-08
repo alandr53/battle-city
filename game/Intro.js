@@ -46,6 +46,7 @@ class Intro extends GameEngine.Scene {
                 delete this.imageTweenStopper
                 this.image.y = 0             
                 } else {
+                    console.log('end Scene Intrio and start Scene Party')
                     this.parent.startScene('party')
                     this.parent.finishScene(this)
                 }

@@ -217,9 +217,16 @@
             "height": 8
         },
         {
-            "keys": ["eagle"],
+            "keys": ["eagle", "alive"],
             "x": 304,
             "y": 32,
+            "width": 16,
+            "height": 16
+        },
+        {
+            "keys": ["eagle", "dead"],
+            "x": 320,
+            "y": 33,
             "width": 16,
             "height": 16
         },

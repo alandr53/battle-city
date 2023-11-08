@@ -18,8 +18,8 @@ class Party extends GameEngine.Scene {
     init() {
         const { loader,  renderer: { canvas: {width, height } } } = this.parent
 
-        Topology.texture = Bullet.texture = Tank.texture = GameOver.texture = loader.getImage('spriteSheet')
-        Topology.atlas = Bullet.atlas = Tank.atlas = GameOver.atlas = loader.getJson('atlas')
+        Topology.texture = Bullet.texture = Tank.texture = GameOver.texture = Eagle.texture = loader.getImage('spriteSheet')
+        Topology.atlas = Bullet.atlas = Tank.atlas = GameOver.atlas = Eagle.atlas = loader.getJson('atlas')
 
         this.partyData = loader.getJson('party') 
 
@@ -74,12 +74,10 @@ class Party extends GameEngine.Scene {
             y: this.parent.renderer.canvas.height / 2
         })
         
-
         if(this.topology.eagle) {
             this.topology.eagle.on('collision', a => {
                 if (a instanceof Bullet) {
-
-                    this.add(this.gameOver)
+                    this.add(this.gameOver) // put Game Over Sprite
                     this.game.startScene('resultScene')
                     this.game.finishScene(this)
                 }
@@ -108,7 +106,6 @@ class Party extends GameEngine.Scene {
                 this.enemies.delete(enemyTank)
                 continue
             }
-
 
             if (enemyTank.nextDirect) {
                 enemyTank.setDirect(enemyTank.nextDirect) 
@@ -140,7 +137,6 @@ class Party extends GameEngine.Scene {
             this.arcadePhysics.add(enemyTank)
 
             enemyTank.setDirect('down')
-
         }
 
         for (const enemyTank of this.enemies) {

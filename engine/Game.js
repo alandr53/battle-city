@@ -53,17 +53,17 @@
           const startedScenes = this.scenes.filter(x => x.status === 'started')
           const pausedScenes = this.scenes.filter(x => x.status === 'paused')
           
-          for (const scene of pausedScenes) {
-            scene.pause()        
+        for (const scene of pausedScenes) {
+                scene.pause()        
             }
 
-       for (const scene of startedScenes) {
+        for (const scene of startedScenes) {
                 scene.update(timestamp)
                 scene.tick(timestamp)
                 this.renderer.clear()
                 scene.draw(this.renderer.canvas, this.renderer.context)
             }
-          
+
             requestAnimationFrame(timestamp => this.tick(timestamp)) 
         }
 
@@ -85,7 +85,7 @@
 
         startScene (name) {
             const scene = this.getScene(name)
-
+            console.log('start scene: '+ name.name)
             if(!scene) {
                 return false
             }
@@ -105,7 +105,7 @@
 
         finishScene (name) {
             const scene = this.getScene(name)
-
+            console.log('finisch scene: '+ name)
             if(!scene) {
                 return false
             }

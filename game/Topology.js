@@ -6,22 +6,42 @@ class Topology extends GameEngine.Container {
         this.size = args.fieldSize || 20
 
         const [x, y] = this.getCoordinats('eagle', true)
-        this.eagle = new Body(Topology.texture, {
+        
+ /*       this.eagle_new = new Eagle(Topology.texture, {
+            debug: DEBUG_MODE,
+            static: true,
+            x: x * this.size,
+            y: y * this.size
+        }) */
+       // console.log('x: ' + x,'x: ' + y)
+       this.eagle = new Body(Topology.texture, {
             debug: DEBUG_MODE,
             static: true,
             x: x * this.size,
             y: y * this.size
         })
 
+        console.log( this.eagle )
         this.eagle.setFramesCollection(Topology.atlas.frames)
-        this.eagle.setFrameByKeys('eagle')
+        this.eagle.setFrameByKeys('eagle', 'alive')
 
         this.eagle.width = this.size
         this.eagle.height = this.size
-
         this.add(this.eagle)
 
 
+        this.eagle_new = new Eagle(Topology.texture, {
+            debug: DEBUG_MODE,
+            static: true,
+            x: x * this.size,
+            y: y * this.size
+        })
+        this.eagle_new.width = this.size
+        this.eagle_new.height = this.size
+        
+        console.log( this.eagle_new  )
+
+   
         for (const [x, y] of this.getCoordinats('brick')) {
             for (let dx = 0; dx <= 1; dx++) {
                 for (let dy = 0; dy <= 1; dy++) {
@@ -70,6 +90,7 @@ class Topology extends GameEngine.Container {
             }
         }
     }
+
     getCoordinats (type, single = false) {
         const results = []
 
